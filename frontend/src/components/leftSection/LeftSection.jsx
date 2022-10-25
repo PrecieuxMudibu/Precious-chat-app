@@ -39,7 +39,7 @@ export default function LeftSection() {
                         </li>
                     </NavLink> */}
           <li>
-            <NavLink to="" className="left-section__link">
+            <NavLink to="/" className="left-section__link">
               <AiFillMessage />
             </NavLink>
           </li>
@@ -51,7 +51,7 @@ export default function LeftSection() {
         </ul>
       </nav>
       <div className="left-section__logout">
-        <RiLogoutBoxRFill className="icon-logout" onClick={() => logOut} />
+        <RiLogoutBoxRFill className="icon-logout" onClick={logOut} />
       </div>
     </div>
   );
