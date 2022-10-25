@@ -1,0 +1,23 @@
+.middle-section__search-bar {
+  display: flex;
+  border-radius: 2rem;
+  background: #ffffff;
+  padding: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+  box-shadow: 0 0.7rem 1rem #9c9c9c;
+  /* box-shadow: 0 7px 1rem rgb(136, 136, 136); */
+}
+
+.middle-section__magnifying-glass,
+.middle-section__more {
+  font-size: 2rem;
+}
+
+.middle-section__search-bar input {
+  border: none;
+  padding-bottom: 0.5rem;
+  width: 75%;
+  outline: none;
+}

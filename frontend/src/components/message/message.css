@@ -1,0 +1,72 @@
+.message {
+  margin: 2rem 0;
+  display: inline-block;
+  /* max-width: 65%; */
+}
+
+.message__photo {
+  /* display: block; */
+  width: 96%;
+  margin: 2%;
+  /* height: 50%; */
+}
+
+.message--send {
+  position: relative;
+  align-self: flex-end;
+}
+
+.message__info {
+  border-radius: 0.5rem;
+  margin-left: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.message__info--receive {
+  background-color: #cfcfcf;
+}
+
+.message__info--send {
+  /* Margin a enlever */
+  margin-right: 1rem;
+  background-color: #4900e6;
+  color: white;
+}
+
+.message__content {
+  font-size: 1.6rem;
+  font-weight: 550;
+  padding: 0 1rem;
+}
+
+.message__horn {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  /* border: 1px solid rgb(0, 0, 0); */
+
+  bottom: 0;
+  left: -1rem;
+  background-color: #cfcfcf;
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+  /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); */
+}
+
+.message__horn--send {
+  position: absolute;
+  left: 97%;
+  clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+  background-color: #4900e6;
+}
+
+.message__time {
+  font-size: 1.3rem;
+  color: grey;
+  margin-top: 1%;
+}
+
+.message__time--send {
+  position: absolute;
+  right: 0;
+}

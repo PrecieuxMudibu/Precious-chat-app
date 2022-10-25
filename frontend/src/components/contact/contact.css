@@ -1,0 +1,39 @@
+.middle-section__third-title {
+  font-size: 1.8rem;
+  /* border: 1px solid red; */
+  margin: 0;
+}
+
+.middle-section__paragraph {
+  font-size: 1.4rem;
+  color: grey;
+  /* border: 1px solid blue; */
+  margin: 0;
+}
+
+.middle-section__contact {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  /* border: 1px solid red; */
+  position: relative;
+  right: 12%;
+  margin-bottom: 5%;
+  cursor: pointer;
+}
+
+/* .middle-section__contact:hover {
+    background-color: grey;
+} */
+
+.middle-section__contact:not(:last-child) {
+  padding-bottom: 5%;
+  border-bottom: 1px solid grey;
+}
+
+.middle-section__profile-picture {
+  height: 5.5rem;
+  width: 5.5rem;
+  border-radius: 5.5rem;
+  margin-right: 2%;
+}

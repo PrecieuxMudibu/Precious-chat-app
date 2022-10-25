@@ -1,0 +1,49 @@
+.right-section__footer {
+  border-top: 1px solid grey;
+  /* border: 1px solid blue; */
+  padding-top: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-section__footer > div {
+  background-color: #e0e0e0;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+.right-section__text-area {
+  /* border: 1px solid blue; */
+  width: 80%;
+  border: none;
+  background-color: transparent;
+  padding: 1.2rem 0.5rem;
+  outline: none;
+}
+
+.right-section__icons {
+  margin-left: 2%;
+  font-size: 2.5rem;
+  /* border: 1px solid red; */
+}
+
+.icon-camera {
+  margin-left: 1rem;
+}
+
+.right-section__send {
+  border: none;
+  background-color: #4900e6;
+  color: white;
+  font-size: 2rem;
+  padding: 1rem 0;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+}
+
+.input__image-selected {
+  display: none;
+}

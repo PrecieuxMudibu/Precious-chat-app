@@ -1,0 +1,8 @@
+.home {
+  display: flex;
+  padding: 2.5%;
+  height: 89vh;
+  /* justify-content: space-between; */
+}
+
+/* ::::::::::::::::::::::::::::::::::::::: */
