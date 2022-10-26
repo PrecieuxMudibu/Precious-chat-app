@@ -1,10 +1,6 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-underscore-dangle */
 import './contact.css';
 import axios from 'axios';
 import React, { useContext } from 'react';
-// eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
 
 import profilePicture from '../../images/profile.jpg';
@@ -33,8 +29,7 @@ export default function Contact({
         // console.log('CONVERSATION', response);
 
         if (response.statusText === 'Created') {
-          // eslint-disable-next-line no-underscore-dangle
-          console.log('ID STATUS Created', response.data.conversation._id);
+          // console.log('ID STATUS Created', response.data.conversation._id);
           setConversationId(response.data.conversation._id);
         } else if (response.statusText === 'OK') {
           // console.log('ID STATUS OK', response.data.data[0]._id);

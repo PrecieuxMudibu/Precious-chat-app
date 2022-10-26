@@ -1,6 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/prop-types */
-/* eslint-disable import/no-cycle */
 import './message.css';
 import { useContext } from 'react';
 import moment from 'moment';

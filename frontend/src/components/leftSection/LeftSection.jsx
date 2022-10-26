@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable import/order */
 import profilePicture from '../../images/profile.jpg';
 import { AiFillMessage } from 'react-icons/ai';
 // import { GrLogout } from 'react-icons/gr';

@@ -4,7 +4,6 @@ import './rightSectionFooter.css';
 import axios from 'axios';
 import { useState, useEffect, useContext, useRef } from 'react';
 import { io } from 'socket.io-client';
-// eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
 
 const socket = io('http://localhost:3200');
@@ -36,7 +35,6 @@ export default function RightSectionFooter() {
     setTableSocketMessages([]);
   }, [conversationId]);
 
-  // eslint-disable-next-line no-shadow
   socket.on('receive-message', (message, tableSocketMessages) => {
     // console.log('MESSAGE RECU DANS LA ROOM',message.text);
 
@@ -44,7 +42,6 @@ export default function RightSectionFooter() {
     setTableSocketMessages([...tableSocketMessages, message]);
   });
 
-  // eslint-disable-next-line no-unused-vars
   async function sendMessage(e) {
     // console.log("SEND MESSAGE",messageText)
 

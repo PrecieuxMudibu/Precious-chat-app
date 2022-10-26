@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import profilePicture from '../../images/profile.jpg';

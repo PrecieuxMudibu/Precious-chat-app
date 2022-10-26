@@ -1,11 +1,8 @@
-/* eslint-disable react/react-in-jsx-scope */
 import './middleSection.css';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import SearchBar from '../searchBar/searchBar';
-// eslint-disable-next-line import/no-cycle
 import Contact from '../contact/Contact';
-// eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
 
 export default function MiddleSection() {
@@ -75,9 +72,7 @@ export default function MiddleSection() {
           <ul>
             {users.map((user) => (
               <Contact
-                // eslint-disable-next-line no-underscore-dangle
                 contactKey={user._id}
-                // eslint-disable-next-line no-underscore-dangle
                 contactId={user._id}
                 contactName={user.user_name}
                 contactProfilePicture={user.user_profile_picture}

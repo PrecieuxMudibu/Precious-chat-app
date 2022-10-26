@@ -1,17 +1,11 @@
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable indent */
-/* eslint-disable import/no-cycle */
 import React, { useContext, useEffect, useState } from 'react';
 import RightSectionFooter from '../rightSectionFooter/RightSectionFooter';
 import RightSectionHeader from '../rightSectionHeader/RightSectionHeader';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
 import Message from '../message/Message';
 import './rightSection.css';
 import { applicationContext } from '../../App';
-// eslint-disable-next-line import/order
 import axios from 'axios';
-// import { io } from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 export default function RightSection() {
   // On passe l'url de notre serveur pour le connecter au frontend

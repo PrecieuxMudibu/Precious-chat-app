@@ -1,5 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable import/no-cycle */
 import './home.css';
 import LeftSection from '../leftSection/LeftSection';
 import MiddleSection from '../middleSection/MiddleSection';
