@@ -6,18 +6,18 @@ import { applicationContext } from '../../App';
 
 export default function RightSectionHeader() {
   const { contactIdentifiant } = useContext(applicationContext);
-  const [contactInfo, setContactInfo] = useState({});
+  const [contactInfo,setContactInfo] = useState({});
 
   useEffect(() => {
     // const routeGetUser = `http://localhost:3200/api/users/${contactIdentifiant}`;
-    const routeGetUser = `${process.env.REACT_APP_API_URL}/api/users/${contactIdentifiant}`;
+    const routeGetUser = `${process.env.REACT_APP_API_URL}/api/user/${contactIdentifiant}`;
 
     axios
       .get(routeGetUser)
       .then((response) => {
-        setContactInfo(response.data.users);
+        setContactInfo(response.data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error("UTILISATEUR NON TROUVE",error));
   }, [contactIdentifiant]);
   return (
     <div className="right-section__header">

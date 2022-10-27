@@ -10,6 +10,8 @@ exports.register = (request, response, next) => {
                 user_name: request.body.user_name,
                 user_email: request.body.user_email,
                 user_password: hash,
+                user_profile_picture:
+                    'https://www.super-blagues.fr/assets/images/profil/profil_defaut.png',
             });
             user.save()
                 .then(() =>
@@ -73,12 +75,32 @@ exports.getAllUsers = (request, response) => {
 
 exports.getUser = (request, response) => {
     User.findOne({ _id: request.params.id })
-        .then((users) =>
-            response.status(200).json({
-                users,
-            })
-        )
+        .then((users) => response.status(200).json(users))
         .catch((error) => {
             response.status(400).json({ error });
         });
 };
+
+exports.updateUser = (request, response) => {
+    const filter = { _id: request.params.id };
+    const update = {
+        user_profile_picture: request.body.user_profile_picture,
+    };
+    User.findOneAndUpdate(filter, update, {
+        new: true,
+    })
+        .then((user) => {
+            message: 'Mis à jour avec succès', response.status(200).json(user);
+        })
+        .catch((error) => response.status(500).json(error));
+};
+// const filter = { name: 'Jean-Luc Picard' };
+// const update = { age: 59 };
+
+// // `doc` is the document _after_ `update` was applied because of
+// // `new: true`
+// let doc = await Character.findOneAndUpdate(filter, update, {
+//   new: true
+// });
+// doc.name; // 'Jean-Luc Picard'
+// doc.age; // 59

@@ -11,7 +11,7 @@ export default function MiddleSection() {
   const { setId } = useContext(applicationContext);
   setId(localStorage.getItem('id'));
   const [users, setUsers] = useState([]);
-  const [conversationFInal] = useState([]);
+  // const [conversationFInal] = useState([]);
   useEffect(() => {
     if (window.location.pathname === '/contacts') {
       // const routeGetAllUsers = 'http://localhost:3200/api/users';
@@ -21,6 +21,7 @@ export default function MiddleSection() {
         .get(routeGetAllUsers)
         .then((response) => {
           setUsers(response.data.users);
+          console.log('USERS', response.data.users);
         })
         .catch((error) => console.error(error));
       // console.log('Users', users);
@@ -64,8 +65,6 @@ export default function MiddleSection() {
   // console.log(window.location.pathname);
   return (
     <div className="middle-section">
-      {console.log('CONVERSTATION', conversationFInal)}
-
       <SearchBar />
       <div>
         <div className="middle-section__recent">
