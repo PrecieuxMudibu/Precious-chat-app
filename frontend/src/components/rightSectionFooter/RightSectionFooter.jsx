@@ -56,7 +56,7 @@ export default function RightSectionFooter() {
       conversation_id: conversationId,
       room: conversationId,
     };
-    
+
     if (fileChoosen) {
       let imageUrl;
       const cloudName = 'dzci2uq4z';

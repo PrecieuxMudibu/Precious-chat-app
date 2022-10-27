@@ -17,7 +17,7 @@ export default function RightSectionHeader() {
       .then((response) => {
         setContactInfo(response.data);
       })
-      .catch((error) => console.error("UTILISATEUR NON TROUVE",error));
+      .catch((error) => console.error(error));
   }, [contactIdentifiant]);
   return (
     <div className="right-section__header">
