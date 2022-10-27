@@ -16,7 +16,6 @@ export default function LeftSection() {
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
   const [profilePicture, setProfilePicture] = useState('');
-  const [newProfilePicture, setNewProfilePicture] = useState('');
   const { id } = useContext(applicationContext);
 
   const routeGetCurrentUserInfo = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
@@ -28,7 +27,7 @@ export default function LeftSection() {
         setProfilePicture(response.data.user_profile_picture);
       })
       .catch((error) => console.error(error));
-  });
+  }, [id]);
   // console.log(id);
   function logOut() {
     localStorage.removeItem('token');
@@ -36,10 +35,13 @@ export default function LeftSection() {
     navigate('/login');
   }
 
+  function cancel() {
+    setFileChoosen(false);
+  }
+
   async function updateProfileInDatabase(data) {
     const routeUpdateUser = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
     await axios
-      // .put(routeUpdateUser, { user_profile_picture: 'newProfilePicture' })
       .put(routeUpdateUser, { user_profile_picture: data })
       .then((response) =>
         console.log('MIS A JOUR DANS LA BASE DE DONNEES', response)
@@ -53,28 +55,22 @@ export default function LeftSection() {
     const cloudName = 'dzci2uq4z';
     const formData = new FormData();
     formData.append('file', fileInfo);
-    // console.log('FILE INFO', fileInfo);
 
     formData.append('upload_preset', 'testPresetName');
-    // console.log('FORM DATA', formData);
-    let test;
     axios
       .post(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         formData
       )
       .then((response) => {
-        // console.log('URL', response.data.secure_url);
-        setNewProfilePicture(response.data.secure_url);
-        test = response.data.secure_url;
-        updateProfileInDatabase(test);
+        setProfilePicture(response.data.secure_url);
+        updateProfileInDatabase(response.data.secure_url);
       });
     setFileChoosen(false);
   }
 
   function uploadImage(files) {
-    console.log('CHANGE IMAGE', files[0]);
-    alert('En continuant vous allez modifier votre profil.');
+    alert('En continuant vous allez modifier votre photo de profil.');
     setFileInfo(files[0]);
     setFileChoosen(true);
     // }
@@ -107,6 +103,7 @@ export default function LeftSection() {
           <button
             type="button"
             className="left-section__button left-section__button--cancel"
+            onClick={cancel}
           >
             Annuler
           </button>
@@ -130,10 +127,6 @@ export default function LeftSection() {
       <div className="left-section__logout">
         <RiLogoutBoxRFill className="icon-logout" onClick={logOut} />
       </div>
-      {console.log('NEW PROFILE PICTURE', newProfilePicture)}
-      <button type="button" onClick={updateProfileInDatabase}>
-        Base de données
-      </button>
     </div>
   );
 }

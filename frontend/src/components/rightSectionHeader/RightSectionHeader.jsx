@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import profilePicture from '../../images/profile.jpg';
+// import profilePicture from '../../images/profile.jpg';
 import { applicationContext } from '../../App';
 
 export default function RightSectionHeader() {
@@ -22,7 +22,7 @@ export default function RightSectionHeader() {
   return (
     <div className="right-section__header">
       <img
-        src={profilePicture}
+        src={contactInfo.user_profile_picture}
         alt="profil du contact"
         className="right-section__profile-picture"
       />
