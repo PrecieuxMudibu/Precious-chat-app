@@ -49,7 +49,7 @@ export default function Message({ text, sender, image, date }) {
   return (
     <div className={leftOrRight}>
       <div className={`${style}`}>
-        <img src={`${image}`} className="message__photo" alt="" />
+        <img src={image} className="message__photo" alt="" />
         {console.log('MESSAGE COMPONENT', image)}
 
         <p className="message__content">

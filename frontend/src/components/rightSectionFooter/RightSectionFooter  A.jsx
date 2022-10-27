@@ -72,13 +72,13 @@ export default function RightSectionFooter() {
           formData
         )
         .then((response) => {
-          message.image = response.data.secure_url;
+          imageUrl = response.data.secure_url;
           console.log('URL', response.data.secure_url);
           console.log('IMAGE URL', imageUrl);
           // return response.data.secure_url;
         });
       setFileChoosen(false);
-      // message.image = imageUrl;
+      message.image = imageUrl;
     }
     setTest(message.image);
     setTableSocketMessages([...tableSocketMessages, message]);
