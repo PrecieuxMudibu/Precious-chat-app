@@ -25,33 +25,12 @@ export default function Message({ text, sender, image, date }) {
     time = 'message__time';
   }
 
-  if (image === '') {
-    return (
-      <div className={leftOrRight}>
-        <div className={`${style}`}>
-          <p className="message__content">
-            {text}
-            <br />
-          </p>
-
-          <div className={hornStyle} />
-        </div>
-        <div className={time}>
-          {moment(Date.now()).format('DD/MM/YYYY') ===
-          moment(date).format('DD/MM/YYYY')
-            ? moment(date).fromNow()
-            : moment(date).format('DD/MM/YYYY - h:s')}
-        </div>
-      </div>
-    );
-  }
-  // else {
   return (
     <div className={leftOrRight}>
       <div className={`${style}`}>
-        <img src={image} className="message__photo" alt="" />
-        {console.log('MESSAGE COMPONENT', image)}
-
+        {image !== '' ? (
+          <img src={image} className="message__photo" alt="" />
+        ) : null}
         <p className="message__content">
           {text}
           <br />
@@ -67,5 +46,4 @@ export default function Message({ text, sender, image, date }) {
       </div>
     </div>
   );
-  // }
 }
