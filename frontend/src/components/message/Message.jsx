@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+
 import './message.css';
 import { useContext } from 'react';
 import moment from 'moment';

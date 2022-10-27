@@ -1,11 +1,12 @@
+/* eslint-disable import/no-cycle */
+import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import RightSectionFooter from '../rightSectionFooter/RightSectionFooter';
 import RightSectionHeader from '../rightSectionHeader/RightSectionHeader';
 import Message from '../message/Message';
 import './rightSection.css';
 import { applicationContext } from '../../App';
-import axios from 'axios';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
 export default function RightSection() {
   // On passe l'url de notre serveur pour le connecter au frontend

@@ -1,9 +1,9 @@
-import profilePicture from '../../images/profile.jpg';
 import { AiFillMessage } from 'react-icons/ai';
 // import { GrLogout } from 'react-icons/gr';
 import { RiLogoutBoxRFill, RiContactsFill } from 'react-icons/ri';
-import './leftSection.css';
 import { NavLink, useNavigate } from 'react-router-dom';
+import profilePicture from '../../images/profile.jpg';
+import './leftSection.css';
 
 export default function LeftSection() {
   // const { id, setId } = useContext(applicationContext);

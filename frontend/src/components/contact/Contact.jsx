@@ -1,3 +1,5 @@
+/* eslint-disable import/no-cycle */
+
 import './contact.css';
 import axios from 'axios';
 import React, { useContext } from 'react';
