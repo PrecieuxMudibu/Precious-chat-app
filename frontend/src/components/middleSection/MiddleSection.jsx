@@ -10,7 +10,7 @@ export default function MiddleSection() {
   const { setId, id } = useContext(applicationContext);
   setId(localStorage.getItem('id'));
   const [users, setUsers] = useState([]);
-  const [conversation, setConversation] = useState([]);
+  const [conversations, setConversation] = useState([]);
   // const [conversationFInal] = useState([]);
   useEffect(() => {
     // console.log('WINDOW LOCATION',window.location.pathname)
@@ -60,6 +60,7 @@ export default function MiddleSection() {
   }, []);
 
   // console.log(window.location.pathname);
+
   return (
     <div className="middle-section">
       <SearchBar />
@@ -67,31 +68,31 @@ export default function MiddleSection() {
         <div className="middle-section__recent">
           <h2 className="middle-section__second-title">Recent</h2>
           <ul>
-            {users.map((user) => (
-              <Contact
-                contactKey={
-                  window.location.pathname === '/'
-                    ? conversation.conversation_participants[0]._id
-                    : user._id
-                }
-                contactId={
-                  window.location.pathname === '/'
-                    ? conversation.conversation_participants[0]._id
-                    : user._id
-                }
-                contactName={
-                  window.location.pathname === '/'
-                    ? conversation.conversation_participants[0].user_name
-                    : user.user_name
-                }
-                contactProfilePicture={
-                  window.location.pathname === '/'
-                    ? conversation.conversation_participants[0]
+            {window.location.pathname === '/contacts'
+              ? users.map((user) => (
+                  <Contact
+                    contactKey={user._id}
+                    contactId={user._id}
+                    contactName={user.user_name}
+                    contactProfilePicture={user.user_profile_picture}
+                  />
+                ))
+              : conversations.map((conversation) => (
+                  <Contact
+                    contactKey={conversation.conversation_participants[0]._id}
+                    contactId={conversation.conversation_participants[0]._id}
+                    contactName={
+                      conversation.conversation_participants[0].user_name
+                    }
+                    contactProfilePicture={
+                      conversation.conversation_participants[0]
                         .user_profile_picture
-                    : user.user_profile_picture
-                }
-              />
-            ))}
+                    }
+                    contactText={
+                      conversation.conversation_last_message.message_text
+                    }
+                  />
+                ))}
           </ul>
         </div>
       </div>

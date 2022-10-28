@@ -12,6 +12,7 @@ export default function Contact({
   contactId,
   contactName,
   contactProfilePicture,
+  contactText
 }) {
   const { id, setConversationId, setContactIdentifiant } =
     useContext(applicationContext);
@@ -36,7 +37,7 @@ export default function Contact({
         } else if (response.statusText === 'OK') {
           // console.log('ID STATUS OK', response.data.data[0]._id);
           setConversationId(response.data.data[0]._id);
-          console.log('CONVERSATION',response.data.data[0]._id)
+          console.log('CONVERSATION', response.data.data[0]._id);
         }
       });
     // .catch((error) => console.error('Erreur trouvée', error));
@@ -55,7 +56,7 @@ export default function Contact({
       />
       <div>
         <h3 className="middle-section__third-title">{contactName}</h3>
-        <p className="middle-section__paragraph" />
+        <p className="middle-section__paragraph">{contactText}</p>
       </div>
     </li>
   );
