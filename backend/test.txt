@@ -19,3 +19,27 @@
   "user_profile_picture": "https://www.super-blagues.fr/assets/images/profil/profil_defaut.png",
   "__v": 0
 }
+// CONVERSATIONS ENTRE TONY ET STEVE
+{
+  "_id": {
+    "$oid": "635b9e11fb629b4b3be3525d"
+  },
+  "conversation_participants": [
+    {
+      "$oid": "635b9246adc544a85980db51"
+    },
+    {
+      "$oid": "635b9302adc544a85980db60"
+    }
+  ],
+  "__v": 0
+}
+
+
+// MEssage de steve{
+      "message_text": "On a besoin de toi Tony !",
+        "message_image": "",
+        "message_sender": "635b9302adc544a85980db60",
+        "message_recipient": "635b9246adc544a85980db51",
+        "conversation_id":"635b9e11fb629b4b3be3525d"
+    }

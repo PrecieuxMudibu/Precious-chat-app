@@ -4,19 +4,9 @@ const Message = require('../models/messageModel');
 const User = require('../models/userModel');
 
 async function createConversation(req, res) {
-    // const conversation = Conversation.create({
-    //     conversation_participants: [req.message_sender, req.message_recipient],
-    // });
     const conversation = new Conversation({
         conversation_participants: [req.message_sender, req.message_recipient],
     });
-
-    // return res.send(conversation);
-    // if (!conversation) {
-    //     return res.status(500);
-    // } else {
-    //     return res.status(201).json(conversation);
-    // }
     conversation
         .save()
         .then((conversation) =>

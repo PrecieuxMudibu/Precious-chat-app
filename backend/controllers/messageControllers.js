@@ -11,23 +11,27 @@ exports.sendMessage = (request, response, next) => {
     });
     message
         .save()
-        .then(() => response.status(201).json({ message: 'Message créé !' }))
+        .then((data) => {
+            let message_id = data._id;
+            // response
+            //     .status(201)
+            //     .json({ message: 'Message créé !', message_id });
+
+            const filter = { _id: request.body.conversation_id };
+            const update = {
+                conversation_last_message: message_id,
+            };
+            Conversation.findOneAndUpdate(filter, update, {
+                new: true,
+            })
+            .then((user) => {
+                message: 'Mis à jour avec succès', response.status(200).json(user);
+            })
+            .catch((error) => response.status(500).json(error));
+        })
         .catch((error) => {
             response.status(400).json({ error });
         });
-    
-
-    const filter = { _id: request.body.conversation_id };
-    const update = {
-        conversation_last_message: message,
-    };
-    Conversation.findOneAndUpdate(filter, update, {
-        new: true,
-    })
-        // .then((user) => {
-        //     message: 'Mis à jour avec succès', response.status(200).json(user);
-        // })
-        // .catch((error) => response.status(500).json(error));
 };
 
 exports.getAllMessages = (request, response) => {
