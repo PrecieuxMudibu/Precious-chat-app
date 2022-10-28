@@ -16,7 +16,6 @@ async function createConversation(req, res) {
         )
         .catch((error) => {
             res.status(500).json({ error });
-            // console.log(error);
         });
 }
 
@@ -65,7 +64,7 @@ exports.getRecentConversation = (request, response) => {
     })
         .populate('conversation_participants')
         .populate('conversation_last_message')
-        
+
         // .then((conversation) => response.status(200).json(conversation))
         .then((conversation) => {
             let tableConversation = conversation;
@@ -78,11 +77,14 @@ exports.getRecentConversation = (request, response) => {
             // // Output: ['red', 'green', 'yellow']
 
             for (let i = 0; i < tableConversation.length; i++) {
-                if (tableConversation[i].conversation_participants[0]._id===request.params._id) {
+                if (
+                    tableConversation[i].conversation_participants[0]._id !==
+                    request.params._id
+                ) {
                     // console.log(tableConversation[i].conversation_participants[0]._id)
-                    tableConversation[i].conversation_participants.splice(0,1)
+                    tableConversation[i].conversation_participants.splice(0, 1);
                 } else {
-                    tableConversation[i].conversation_participants.splice(1,1)
+                    tableConversation[i].conversation_participants.splice(1, 1);
                 }
             }
             response.status(200).json(tableConversation);
@@ -95,84 +97,4 @@ exports.getRecentConversation = (request, response) => {
                 error,
             })
         );
-
-    // User.findOne({ _id: request.body.contact_id })
-    // .then((users) =>
-    //     response.status(200).json({
-    //         users,
-    //     })
-    // )
-    // .catch((error) => {
-    //     response.status(400).json({ error });
-    // });
 };
-
-////////////////
-// exports.findConversation = (request, response) => {
-
-//     Conversation.find(
-//         {
-//             conversation_participants: [
-//                 request.params.message_sender,
-//                 request.params.message_recipient,
-//             ],
-//         },
-//         (error, data) => {
-//             if (error) {
-//                 return response.status(500).json(error);
-//             } else {
-//                 if (data.length === 0) {
-//                     return response
-//                         .status(200)
-//                         .json({ message: 'Rien trouvé', finded: false });
-//                 } else
-//                     return response.status(200).json({
-//                         message: 'Une conversation trouvée',
-//                         finded: true,
-//                         data,
-//                     });
-//             }
-//         }
-//     );
-// };
-
-// exports.findConversation = (request, response) => {
-//     Conversation.find(
-//         {
-//             conversation_participants: [
-//                 request.body.message_sender,
-//                 request.body.message_recipient,
-//             ],
-//         },
-//         (error, data) => {
-//             if (error) {
-//                 return response.status(500).json(error);
-//             } else {
-//                 if (data.length == 0) {
-//                     Conversation.find(
-//                         {
-//                             conversation_participants: [
-//                                 request.body.message_recipient,
-//                                 request.body.message_sender,
-//                             ],
-//                         },
-//                         (error, data) => {
-//                             if (error) {
-//                                 return response.status(500).json(error);
-//                             } else {
-//                                 if (data.length == 0) {
-//                                     return response.status(404).json({
-//                                         message: "Il n'y a rien",
-//                                         finded: false,
-//                                     });
-//                                 }
-//                             }
-//                         }
-//                     );
-//                 } else {
-//                     return response.status(200).json({ data });
-//                 }
-//             }
-//         }
-//     );
-// };
