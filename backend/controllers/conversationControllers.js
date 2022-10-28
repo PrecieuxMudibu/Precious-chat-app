@@ -70,35 +70,35 @@ exports.getRecentConversation = (request, response) => {
     let tableConversationFinal = [];
 
     Conversation.find({
-        conversation_participants: { $in: [request.params.current_user] },
+        conversation_participants: { $in: [request.params._id] },
         // conversation_participants: [request.body.current_user],
     })
-        .then((conversation) => response.status(200).json(conversation))
-        // .then((conversation) => {
-        //     tableConversation = [...conversation];
-        //     console.log('tableConversation', tableConversation);
+        .populate('conversation_participants')
+        .populate('conversation_last_message')
+        
+        // .then((conversation) => response.status(200).json(conversation))
+        .then((conversation) => {
+            let tableConversation = conversation;
+            console.log(conversation);
 
-            
-        //     // if (tableConversation.length !== 0) {
-        //     //     tableConversation.forEach((item) => {
-        //     //         let conversation = {
-        //     //             _id: item._id,
-        //     //         };
+            // const colors = ['red', 'green', 'blue', 'yellow'];
+            // colors.splice(2, 1);
 
+            // console.log(colors);
+            // // Output: ['red', 'green', 'yellow']
 
-        //     //         if (
-        //     //             item.conversation_participants[0] ===
-        //     //             request.body.current_user
-        //     //         ) {
-        //     //             conversation.contact = conversation_participants[1];
-        //     //         } else {
-        //     //             conversation.contact = conversation_participants[0];
-        //     //         }
-        //     //         tableConversationFinal.push(conversation);
-        //     //     });
-        //     //     console.log('tableConversation', tableConversationFinal);
-        //     // }
-        // })
+            for (let i = 0; i < tableConversation.length; i++) {
+                if (tableConversation[i].conversation_participants[0]._id===request.params._id) {
+                    // console.log(tableConversation[i].conversation_participants[0]._id)
+                    tableConversation[i].conversation_participants.splice(0,1)
+                } else {
+                    tableConversation[i].conversation_participants.splice(1,1)
+                }
+            }
+            response.status(200).json(tableConversation);
+        })
+        // .then((conversation) => response.status(200).json(conversation[0].conversation_participants))
+
         .catch((error) =>
             response.status(500).json({
                 message: 'Erreur lors de la recherche',

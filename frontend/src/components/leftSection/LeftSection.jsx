@@ -23,7 +23,6 @@ export default function LeftSection() {
     axios
       .get(routeGetCurrentUserInfo)
       .then((response) => {
-        console.log('UTILISATEUR COURANT', response.data.user_profile_picture);
         setProfilePicture(response.data.user_profile_picture);
       })
       .catch((error) => console.error(error));

@@ -26,7 +26,7 @@ export default function RightSectionFooter() {
   const inputFile = useRef();
   const [fileInfo, setFileInfo] = useState({});
   // const routeSendMessage = 'http://localhost:3200/api/message';
-  // const routeSendMessage = `${process.env.REACT_APP_API_URL}/api/message`;
+  const routeSendMessage = `${process.env.REACT_APP_API_URL}/api/message`;
   socket.on('connect', () => {
     console.log(`You are connected with: ${socket.id}`);
   });
@@ -56,7 +56,7 @@ export default function RightSectionFooter() {
       conversation_id: conversationId,
       room: conversationId,
     };
-
+    
     if (fileChoosen) {
       let imageUrl;
       const cloudName = 'dzci2uq4z';
@@ -72,33 +72,33 @@ export default function RightSectionFooter() {
           formData
         )
         .then((response) => {
-          message.image = response.data.secure_url;
+          imageUrl = response.data.secure_url;
           console.log('URL', response.data.secure_url);
           console.log('IMAGE URL', imageUrl);
           // return response.data.secure_url;
         });
       setFileChoosen(false);
-      // message.image = imageUrl;
+      message.image = imageUrl;
     }
     setTest(message.image);
     setTableSocketMessages([...tableSocketMessages, message]);
     socket.emit('send-message', message, tableSocketMessages);
-    // await axios
-    //   .post(routeSendMessage, {
-    //     message_text: messageText,
-    //     // message_image: '',
-    //     message_image: imageUrl,
-    //     message_date: '',
-    //     message_sender: id,
-    //     message_recipient: contactIdentifiant,
-    //     conversation_id: conversationId,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    await axios
+      .post(routeSendMessage, {
+        message_text: messageText,
+        // message_image: '',
+        message_image: message.image,
+        message_date: '',
+        message_sender: id,
+        message_recipient: contactIdentifiant,
+        conversation_id: conversationId,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     inputMessage.current.value = '';
     setMessageText('');

@@ -7,18 +7,17 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function MiddleSection() {
-  // const { id } = useContext(applicationContext);
-  const { setId } = useContext(applicationContext);
+  const { setId,id } = useContext(applicationContext);
   setId(localStorage.getItem('id'));
   const [users, setUsers] = useState([]);
   // const [conversationFInal] = useState([]);
   useEffect(() => {
     if (window.location.pathname === '/contacts') {
       // const routeGetAllUsers = 'http://localhost:3200/api/users';
-      const routeGetAllUsers = `${process.env.REACT_APP_API_URL}/api/users`;
-
+      // const routeGetAllUsers = `${process.env.REACT_APP_API_URL}/api/users`;
+      const routeGetAllUsersExceptCurrentUser = `${process.env.REACT_APP_API_URL}/api/users/${id}`
       axios
-        .get(routeGetAllUsers)
+        .get(routeGetAllUsersExceptCurrentUser)
         .then((response) => {
           setUsers(response.data.users);
           console.log('USERS', response.data.users);

@@ -61,13 +61,25 @@ exports.login = (request, response) => {
     });
 };
 
-exports.getAllUsers = (request, response) => {
-    User.find()
-        .then((users) =>
+// exports.getAllUsers = (request, response) => {
+//     User.find()
+//         .then((users) =>
+//             response.status(200).json({
+//                 users,
+//             })
+//         )
+//         .catch((error) => {
+//             response.status(400).json({ error });
+//         });
+// };
+
+exports.getAllUsersExceptCurrentUser = (request, response) => {
+    User.find({ _id: { $nin: [request.params.id] } })
+        .then((users) => {
             response.status(200).json({
                 users,
-            })
-        )
+            });
+        })
         .catch((error) => {
             response.status(400).json({ error });
         });

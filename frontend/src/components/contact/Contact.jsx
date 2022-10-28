@@ -36,6 +36,7 @@ export default function Contact({
         } else if (response.statusText === 'OK') {
           // console.log('ID STATUS OK', response.data.data[0]._id);
           setConversationId(response.data.data[0]._id);
+          console.log('CONVERSATION',response.data.data[0]._id)
         }
       });
     // .catch((error) => console.error('Erreur trouvée', error));

@@ -1,163 +1,21 @@
 {
-  "user_name": "Précieux"
-  "user_email": "precieux@gmail.com",
-  "user_password": "motdepasse"
-}
-
-{
-  "user_name": "Benjamin",
-  "user_email": "benjamin@gmail.com",
-  "user_password": "password"
-}
-
-{
-  "user_name": "Hannaël",
-  "user_email": "hannael@gmail.com",
-  "user_password": "hannaël"
-}
-
-{
-  user_name: 'Tony',
-  user_email: 'tony@gmail.com',
-  user_password: 'Mark50'
-}
-
-
-
-{
-  user_name: 'Steve',
-  user_email: 'steve@gmail.com',
-  user_password: 'Justice'
-}
-
-{
-  user_name: 'Tommy',
-  user_email: 'tommy@gmail.com',
-  user_password: 'Tommy'
-}
-
-{
-  user_name: 'Placide',
-  user_email: 'placide@gmail.com',
-  user_password: 'Placide'
-}
-
-{
-  user_name: 'Arthur',
-  user_email: 'arthur@gmail.com',
-  user_password: 'Arthur'
-}
-
-{
-  user_name: 'Grace',
-  user_email: 'grace@gmail.com',
-  user_password: 'Grace'
-}
-
-
-
-///////// Rchat idnetifiant
-Précieux
-
-
------------------CONVERSATION----------------
-
-
-{ 
-  "message_text": "Salut",
-  "message_image": "",
-  "message_date": "",
-  "message_sender": "63454034ec955fdc325ffff2",   Précieux
-  "message_recipient":"6345419d5f74017840fc54e8"  Benjamin
-}
-
-
-
-
-----
-{
-  "message_sender":"63454034ec955fdc325ffff2",
-  "message_recipient":"6345419d5f74017840fc54e8"
-}
-
-
-Résultat
-{
-  "conversation_participants": [
-    "63454034ec955fdc325ffff2",
-    "6345419d5f74017840fc54e8"
-  ],
-  "_id": "634aed55717f3802701f1ec4",
+  "_id": {
+    "$oid": "635b9246adc544a85980db51"
+  },
+  "user_name": "Tony",
+  "user_email": "tony@gmail.com",
+  "user_password": "$2b$10$WYQSpA2pUVIESh7mY9HRLeNVw9x7COErevo9dcgYzoilxQVEqUlx2",
+  "user_profile_picture": "https://www.super-blagues.fr/assets/images/profil/profil_defaut.png",
   "__v": 0
 }
 
-
-----
-    1 Précieux
-    {"message_text": "Salut Benjamin !",
-        "message_image": "",
-        "message_date": "",
-        "message_sender": "63454034ec955fdc325ffff2",
-        "message_recipient": "6345419d5f74017840fc54e8",
-        "conversation_id":"634d983530b2c0169afe39c9"
-    }
-
-     2  Benjaminw
-    {
-      "message_text": "Salut Précieux, tu vas bien ?",
-        "message_image": "",
-        "message_date": "",
-        "message_sender": "6345419d5f74017840fc54e8",
-        "message_recipient": "63454034ec955fdc325ffff2",
-        "conversation_id":"634d983530b2c0169afe39c9"
-    }
-
-    3 Précieux
-   {
-      "message_text": "Je vais bien. Et toi ?",
-        "message_image": "",
-        "message_date": "",
-        "message_sender": "63454034ec955fdc325ffff2",
-        "message_recipient": "6345419d5f74017840fc54e8",
-        "conversation_id":"634d983530b2c0169afe39c9"
-    }
-
----------Samy
-    {
-      "message_text": "Hello Précieux !",
-        "message_image": "",
-        "message_date": "",
-        "message_sender": "6345419d5f74017840fc54e8",
-        "message_recipient": "63454034ec955fdc325ffff2"
-    }
-
-    {
-      "message_text": "Hello Benjamin !",
-        "message_image": "",
-        "message_date": "",
-        "message_sender": "63454034ec955fdc325ffff2",
-        "message_recipient": "6345419d5f74017840fc54e8"
-    }
-
-
-    63454034ec955fdc325ffff2    Precieux id
-    6345419d5f74017840fc54e8     Benjamin id
-
-
-    Je dois rechercher dans les conversations toutes les conversations contenant l'id de lutilisateur actuel dans "conversations participants"
-    Je vais y récupérer l'id de l'autre utilisateur
-    Je dois récupérer son nom grâce à son id 
-
-    // Je peux placer tous mes identifiants de conversations dans un tableau et faire des get avec useEffect  sur chacun de ces identifiants pour récupérer le dernier message
-
-
-    Je dois récupérer tous les messages le dernier message
-
-    {
-      "message_text": "Hello Benjamin !",
-        "message_image": "",
-        "message_date": "",
-        "message_sender": "63454034ec955fdc325ffff2",
-        "message_recipient": "6345419d5f74017840fc54e8",
-        converstion_id: "hghgkjhghgjggkgk"
-    }
+{
+  "_id": {
+    "$oid": "635b9302adc544a85980db60"
+  },
+  "user_name": "Steve",
+  "user_email": "steve@gmail.com",
+  "user_password": "$2b$10$D6.vgiUErdWUIzJd1mgOXuJ.mDpo8vEE6BVUrCjI0FGqzoSrdMyga",
+  "user_profile_picture": "https://www.super-blagues.fr/assets/images/profil/profil_defaut.png",
+  "__v": 0
+}
