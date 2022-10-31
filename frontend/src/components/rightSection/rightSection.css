@@ -4,6 +4,8 @@
   background: #ffffff;
   border-radius: 2rem;
   box-shadow: 0 0.7rem 1rem #9c9c9c;
+  position: relative;
+  border: 1px solid blue;
 }
 
 .right-section__header {
@@ -36,10 +38,12 @@
 .right-section__messages {
   height: 75%;
   overflow-y: scroll;
+  
 }
 
 .right-section__message {
   display: flex;
   flex-direction: column;
+  
   /* position: relative; */
 }

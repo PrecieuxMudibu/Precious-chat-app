@@ -28,7 +28,6 @@ export default function RightSection() {
     axios
       .get(routeGetAllMessages)
       .then((response) => {
-        console.log('TABLE DES MESSAGES', response.data.messages);
         setMessages(response.data.messages);
       })
       .catch((error) => console.error(error));

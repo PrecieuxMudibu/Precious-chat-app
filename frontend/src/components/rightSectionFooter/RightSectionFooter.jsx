@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useState, useEffect, useContext, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { applicationContext } from '../../App';
+// import image from '../../images/profile.jpg'
 
 const socket = io('http://localhost:3200');
 
@@ -21,7 +22,7 @@ export default function RightSectionFooter() {
   const [messageText, setMessageText] = useState('');
   const [fileChoosen, setFileChoosen] = useState(false);
   const [test, setTest] = useState('');
-  //   const [receive, setReceive] = useState('');
+    const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
   const inputFile = useRef();
   const [fileInfo, setFileInfo] = useState({});
@@ -102,11 +103,13 @@ export default function RightSectionFooter() {
 
     inputMessage.current.value = '';
     setMessageText('');
+    setLocalLink('');
   }
 
   function uploadImage(files) {
     setFileInfo(files[0]);
     setFileChoosen(true);
+    setLocalLink(URL.createObjectURL(files[0]))
   }
 
   // function sendToCloudinary() {
@@ -122,6 +125,8 @@ export default function RightSectionFooter() {
   // }
 
   return (
+    <> {localLink !=='' ?<div className='right-section__photo-preview'><img src={localLink} alt="" /></div>:null}
+    
     <div className="right-section__footer">
       {console.log('IMAGE', test)}
 
@@ -139,6 +144,7 @@ export default function RightSectionFooter() {
             className="input__image-selected"
             type="file"
             name="file"
+            accept=".jpg, .png, .gif"
             placeholder="Uploader une image"
             onChange={(event) => {
               uploadImage(event.target.files);
@@ -159,5 +165,6 @@ export default function RightSectionFooter() {
         <AiOutlineSend />
       </button>
     </div>
+    </>
   );
 }

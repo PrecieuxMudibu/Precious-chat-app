@@ -27,15 +27,10 @@ export default function Contact({
         message_recipient: contactId,
       })
       .then((response) => {
-        // console.log('CONVERSATION', response);
-
         if (response.statusText === 'Created') {
-          // console.log('ID STATUS Created', response.data.conversation._id);
           setConversationId(response.data.conversation._id);
         } else if (response.statusText === 'OK') {
-          // console.log('ID STATUS OK', response.data.data[0]._id);
           setConversationId(response.data.data[0]._id);
-          console.log('CONVERSATION', response.data.data[0]._id);
         }
       });
     // .catch((error) => console.error('Erreur trouvée', error));
@@ -50,7 +45,10 @@ export default function Contact({
       />
       <div>
         <h3 className="middle-section__third-title">{contactName}</h3>
-        <p className="middle-section__paragraph">{contactText}</p>
+        <p className="middle-section__paragraph">
+          {contactText === '' ? 'Photo' : contactText}
+        </p>
+        {/* {console.log('CONTACT TEXT',contactText)} */}
       </div>
     </li>
   );

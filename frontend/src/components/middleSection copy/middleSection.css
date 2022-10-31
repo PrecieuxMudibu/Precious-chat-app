@@ -1,11 +1,3 @@
-.home {
-  display: flex;
-  padding: 2.5%;
-  height: 89vh;
-  /* justify-content: space-between; */
-}
-
-/* ::::::::::::::::::::::::::::::::::::::: */
 ::-webkit-scrollbar {
   display: none;
 }
@@ -31,4 +23,3 @@
   padding-left: 5%;
   font-size: 2rem;
 }
-
