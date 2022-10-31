@@ -8,11 +8,10 @@ import { applicationContext } from '../../App';
 // import profilePicture from '../../images/profile.jpg';
 
 export default function Contact({
-  contactKey,
   contactId,
   contactName,
   contactProfilePicture,
-  contactText
+  contactText,
 }) {
   const { id, setConversationId, setContactIdentifiant } =
     useContext(applicationContext);
@@ -44,11 +43,7 @@ export default function Contact({
   }
 
   return (
-    <li
-      key={contactKey}
-      className="middle-section__contact"
-      onClick={getConversation}
-    >
+    <li className="middle-section__contact" onClick={getConversation}>
       <img
         src={contactProfilePicture}
         alt="profil du contact"

@@ -123,10 +123,6 @@ export default function RightSectionFooter() {
 
   return (
     <div className="right-section__footer">
-      {/* {console.log(tableSocketMessages)} */}
-      {/* <div><img src="" alt="" /></div> */}
-      {/* {console.log('FILE INFO',fileInfo)} */}
-      {/* {console.log('IMAGE', imageUrl)} */}
       {console.log('IMAGE', test)}
 
       <div>

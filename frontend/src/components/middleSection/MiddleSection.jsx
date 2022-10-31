@@ -11,33 +11,13 @@ export default function MiddleSection() {
   setId(localStorage.getItem('id'));
   const [users, setUsers] = useState([]);
   const [conversations, setConversation] = useState([]);
-  // const [conversationFInal] = useState([]);
   useEffect(() => {
-    // console.log('WINDOW LOCATION',window.location.pathname)
     if (window.location.pathname === '/') {
       const routeGetRecentConversation = `${process.env.REACT_APP_API_URL}/api/conversation/${id}`;
       axios
         .get(routeGetRecentConversation)
         .then((response) => {
           setConversation(response.data);
-          console.log('CONVERSATION', response.data);
-          console.log(
-            'CONTACT NAME',
-            response.data[0].conversation_participants[0].user_name
-          );
-          console.log(
-            'CONTACT ID',
-            response.data[0].conversation_participants[0]._id
-          );
-          console.log(
-            'CONTACT PROFIL PICTURE',
-            response.data[0].conversation_participants[0].user_profile_picture
-          );
-          console.log(
-            'LAST MESSAGE',
-            response.data[0].conversation_last_message.message_text
-          );
-          // console.log('CONVERSATION', response.data.users);
         })
         .catch((error) => console.error(error));
     }
@@ -49,17 +29,10 @@ export default function MiddleSection() {
         .get(routeGetAllUsersExceptCurrentUser)
         .then((response) => {
           setUsers(response.data.users);
-          console.log('USERS', response.data.users);
         })
         .catch((error) => console.error(error));
-      // console.log('Users', users);
-      // console.log('Users One',users[0]);
-
-      // .then((response) => console.log(response.data.users[0]));
     }
-  }, []);
-
-  // console.log(window.location.pathname);
+  }, [window.location.pathname]);
 
   return (
     <div className="middle-section">
@@ -71,7 +44,7 @@ export default function MiddleSection() {
             {window.location.pathname === '/contacts'
               ? users.map((user) => (
                   <Contact
-                    contactKey={user._id}
+                    key={user._id}
                     contactId={user._id}
                     contactName={user.user_name}
                     contactProfilePicture={user.user_profile_picture}
@@ -79,7 +52,7 @@ export default function MiddleSection() {
                 ))
               : conversations.map((conversation) => (
                   <Contact
-                    contactKey={conversation.conversation_participants[0]._id}
+                    key={conversation.conversation_participants[0]._id}
                     contactId={conversation.conversation_participants[0]._id}
                     contactName={
                       conversation.conversation_participants[0].user_name

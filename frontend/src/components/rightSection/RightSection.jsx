@@ -28,11 +28,8 @@ export default function RightSection() {
     axios
       .get(routeGetAllMessages)
       .then((response) => {
-        // console.log('MESSAGES TROUVES', response.data);
         console.log('TABLE DES MESSAGES', response.data.messages);
         setMessages(response.data.messages);
-        // console.log('NOM TROUVE', response.data.users.user_name);
-        // setContactInfo(response.data.users);
       })
       .catch((error) => console.error(error));
   }, [conversationId]);
@@ -43,6 +40,7 @@ export default function RightSection() {
         <div className="right-section__message">
           {messages?.map((message) => (
             <Message
+              key={message._id}
               text={message.message_text}
               sender={message.message_sender}
               image={message.message_image}
