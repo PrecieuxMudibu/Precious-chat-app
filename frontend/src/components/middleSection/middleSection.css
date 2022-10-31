@@ -15,11 +15,11 @@
   height: 73vh;
   margin-top: 7%;
   padding-top: 8%;
-  padding-left: 5%;
   overflow-y: scroll;
   scrollbar-width: none;
 }
 
 .middle-section__second-title {
+  padding-left: 5%;
   font-size: 2rem;
 }

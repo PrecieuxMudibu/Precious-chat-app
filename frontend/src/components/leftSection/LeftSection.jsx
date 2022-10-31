@@ -43,10 +43,10 @@ export default function LeftSection() {
     await axios
       .put(routeUpdateUser, { user_profile_picture: data })
       .then((response) =>
-        console.log('MIS A JOUR DANS LA BASE DE DONNEES', response)
+        console.log('MISE A JOUR DANS LA BASE DE DONNEES', response)
       )
       .catch((error) =>
-        console.error('ENVOI DANS LA BASE DE DONNEES ECHOUEE', error)
+        console.error('ECHEC DE MISE A JOUR DANS LA BASE DE DONNEES ECHOUEE', error)
       );
   }
 
@@ -69,6 +69,7 @@ export default function LeftSection() {
   }
 
   function uploadImage(files) {
+    // eslint-disable-next-line no-alert
     alert('En continuant vous allez modifier votre photo de profil.');
     setFileInfo(files[0]);
     setFileChoosen(true);
