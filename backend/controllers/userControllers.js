@@ -102,7 +102,7 @@ exports.updateUser = (request, response) => {
         new: true,
     })
         .then((user) => {
-            message: 'Mis à jour avec succès', response.status(200).json(user);
+            message: 'Votre profil a été mis à jour avec succès', response.status(200).json(user);
         })
         .catch((error) => response.status(500).json(error));
 };

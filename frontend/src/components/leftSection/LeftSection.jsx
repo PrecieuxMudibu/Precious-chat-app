@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, useContext } from 'react';
 import { AiFillMessage } from 'react-icons/ai';
 // import { GrLogout } from 'react-icons/gr';
 import { RiLogoutBoxRFill, RiContactsFill } from 'react-icons/ri';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
 // import profilePicture from '../../images/profile.jpg';
@@ -72,7 +72,6 @@ export default function LeftSection() {
     alert('En continuant vous allez modifier votre photo de profil.');
     setFileInfo(files[0]);
     setFileChoosen(true);
-    // }
   }
   return (
     <div className="left-section">
@@ -112,14 +111,28 @@ export default function LeftSection() {
       <nav className="left-section__navigation">
         <ul>
           <li>
-            <NavLink to="/" className="left-section__link">
+            <Link
+              to="/"
+              className={
+                window.location.pathname === '/'
+                  ? 'left-section__link active'
+                  : 'left-section__link'
+              }
+            >
               <AiFillMessage />
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink to="/contacts" className="left-section__link">
+            <Link
+              to="/contacts"
+              className={
+                window.location.pathname === '/contacts'
+                  ? 'left-section__link active'
+                  : 'left-section__link'
+              }
+            >
               <RiContactsFill className="icon-contact" />
-            </NavLink>
+            </Link>
           </li>
         </ul>
       </nav>
