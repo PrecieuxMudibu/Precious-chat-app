@@ -16,7 +16,7 @@ export default function LeftSection() {
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
   const [profilePicture, setProfilePicture] = useState('');
-  const { id } = useContext(applicationContext);
+  const { id,  setContactSelected} = useContext(applicationContext);
 
   const routeGetCurrentUserInfo = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function LeftSection() {
   function logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    setContactSelected(false)
     navigate('/login');
   }
 
