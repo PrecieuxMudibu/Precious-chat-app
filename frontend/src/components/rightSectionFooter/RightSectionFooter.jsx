@@ -1,6 +1,9 @@
 /* eslint-disable import/no-cycle */
 
+// eslint-disable-next-line no-unused-vars
 import { AiOutlineSend } from 'react-icons/ai';
+// eslint-disable-next-line no-unused-vars
+import { ColorRing } from 'react-loader-spinner';
 import { BsCamera, BsEmojiLaughing } from 'react-icons/bs';
 import './rightSectionFooter.css';
 import axios from 'axios';
@@ -21,8 +24,10 @@ export default function RightSectionFooter() {
   } = useContext(applicationContext);
   const [messageText, setMessageText] = useState('');
   const [fileChoosen, setFileChoosen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [messageSended, setMessageSended] = useState(true);
   const [test, setTest] = useState('');
-    const [localLink, setLocalLink] = useState('');
+  const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
   const inputFile = useRef();
   const [fileInfo, setFileInfo] = useState({});
@@ -49,6 +54,7 @@ export default function RightSectionFooter() {
 
   async function sendMessage() {
     // console.log("SEND MESSAGE",messageText)
+    setMessageSended(false)
     const message = {
       text: messageText,
       image: '',
@@ -104,67 +110,77 @@ export default function RightSectionFooter() {
     inputMessage.current.value = '';
     setMessageText('');
     setLocalLink('');
+    setMessageSended(true)
+
   }
 
   function uploadImage(files) {
     setFileInfo(files[0]);
     setFileChoosen(true);
-    setLocalLink(URL.createObjectURL(files[0]))
+    setLocalLink(URL.createObjectURL(files[0]));
   }
 
-  // function sendToCloudinary() {
-  //     axios
-  //         .post(
-  //             'https://api.cloudinary.com/v1_1/dzci2uq4z/image/upload',
-  //             formData
-  //         )
-  //         .then((response) => {
-  //             console.log('URL', response.data.secure_url);
-  //             // setImageUrl(response.data.secure_url)
-  //         });
-  // }
-
   return (
-    <> {localLink !=='' ?<div className='right-section__photo-preview'><img src={localLink} alt="" /></div>:null}
-    
-    <div className="right-section__footer">
-      {console.log('IMAGE', test)}
+    <>
+      {' '}
+      {localLink !== '' ? (
+        <div className="right-section__photo-preview">
+          <img src={localLink} alt="" />
+        </div>
+      ) : null}
+      <div className="right-section__footer">
+        {console.log('IMAGE', test)}
 
-      <div>
-        <textarea
-          className="right-section__text-area"
-          rows="1"
-          onChange={(e) => setMessageText(e.target.value)}
-          ref={inputMessage}
-        />
-        <span className="right-section__icons">
-          <BsEmojiLaughing className="icon-emoji" />
-          <input
-            ref={inputFile}
-            className="input__image-selected"
-            type="file"
-            name="file"
-            accept=".jpg, .png, .gif"
-            placeholder="Uploader une image"
-            onChange={(event) => {
-              uploadImage(event.target.files);
-            }}
+        <div>
+          <textarea
+            className="right-section__text-area"
+            rows="1"
+            onChange={(e) => setMessageText(e.target.value)}
+            ref={inputMessage}
           />
+          <span className="right-section__icons">
+            <BsEmojiLaughing className="icon-emoji" />
+            <input
+              ref={inputFile}
+              className="input__image-selected"
+              type="file"
+              name="file"
+              accept=".jpg, .png, .gif"
+              placeholder="Uploader une image"
+              onChange={(event) => {
+                uploadImage(event.target.files);
+              }}
+            />
 
-          <BsCamera
-            className="icon-camera"
-            onClick={() => inputFile.current.click()}
-          />
-        </span>
+            <BsCamera
+              className="icon-camera"
+              onClick={() => inputFile.current.click()}
+            />
+          </span>
+        </div>
+
+        <button
+          type="button"
+          className="right-section__send"
+          onClick={sendMessage}
+        >
+          {messageSended ? (
+            <AiOutlineSend className="send-icon" />
+          ) : (
+            <ColorRing
+              visible
+              height="40"
+              width="40"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['white', 'white', 'white', 'white', 'white']}
+              className="send-loader"
+            />
+          )}
+          {/* <AiOutlineSend className='send-icon'/> */}
+        </button>
       </div>
-      <button
-        type="button"
-        className="right-section__send"
-        onClick={sendMessage}
-      >
-        <AiOutlineSend />
-      </button>
-    </div>
     </>
   );
 }
