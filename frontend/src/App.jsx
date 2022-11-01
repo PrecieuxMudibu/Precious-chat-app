@@ -18,6 +18,7 @@ function App() {
   const [conversationId, setConversationId] = useState('');
   const [contactIdentifiant, setContactIdentifiant] = useState('');
   const [tableSocketMessages, setTableSocketMessages] = useState([]);
+  const [contactSelected, setContactSelected] = useState(false);
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
@@ -36,6 +37,8 @@ function App() {
           setContactIdentifiant,
           tableSocketMessages,
           setTableSocketMessages,
+          contactSelected,
+          setContactSelected,
         }}
       >
         <Routes>

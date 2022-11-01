@@ -1,7 +1,6 @@
 .middle-section__third-title {
   color:black;
   font-size: 1.8rem;
-  /* border: 1px solid red; */
   margin: 0;
   transition: color .6s;
 
@@ -10,8 +9,9 @@
 .middle-section__paragraph {
   font-size: 1.4rem;
   color: grey;
-  /* border: 1px solid blue; */
   margin: 0;
+  transition: color .6s;
+
 }
 
 ul {
@@ -40,7 +40,10 @@ ul {
 
 .middle-section__contact:hover .middle-section__third-title {
   color:white;
+}
 
+.middle-section__contact:hover .middle-section__paragraph {
+  color:white;
 }
 
 .middle-section__contact:not(:last-child) {

@@ -12,7 +12,7 @@ export default function Contact({
   contactProfilePicture,
   contactText,
 }) {
-  const { id, setConversationId, setContactIdentifiant } =
+  const { id, setConversationId, setContactIdentifiant, setContactSelected } =
     useContext(applicationContext);
 
   // const routeFindOrCreateConversation =
@@ -33,6 +33,7 @@ export default function Contact({
           setConversationId(response.data.data[0]._id);
         }
       });
+      setContactSelected(true)
     // .catch((error) => console.error('Erreur trouvée', error));
   }
 

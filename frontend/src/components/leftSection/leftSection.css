@@ -1,13 +1,10 @@
 .left-section {
-  /* border: 1Px solid red; */
   width: 13%;
   background-color: #5500ff;
   margin-right: 4%;
   border-radius: 2rem;
-
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .left-section__profile-picture {
@@ -16,8 +13,6 @@
   border-radius: 50%;
   margin: 20%;
   align-self: center;
-  /* border: .1rem solid white;
-  padding:1rem; */
 }
 
 .left-section__button {
@@ -44,6 +39,9 @@
 
 li {
   list-style: none;
+  margin-left:20%;
+   /* width: 80%; */
+  /* align-self: flex-end; */
 }
 .left-section__link {
   height: 7rem;

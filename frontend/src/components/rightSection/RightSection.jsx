@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
@@ -6,18 +7,10 @@ import RightSectionHeader from '../rightSectionHeader/RightSectionHeader';
 import Message from '../message/Message';
 import './rightSection.css';
 import { applicationContext } from '../../App';
-// import { io } from 'socket.io-client';
+import background from '../../images/background.png';
 
 export default function RightSection() {
-  // On passe l'url de notre serveur pour le connecter au frontend
-  // const socket = io('http://localhost:3200');
-  // socket.on('connect', () => {
-  //     console.log(`You are connected with: ${socket.id}`);
-  // });
-
-  // Envoyer un évènement dans le backend
-  // socket.emit('custom-event', 10, 'Hi');
-  const { conversationId, tableSocketMessages } =
+  const { conversationId, tableSocketMessages, contactSelected } =
     useContext(applicationContext);
   const [messages, setMessages] = useState();
 
@@ -32,7 +25,8 @@ export default function RightSection() {
       })
       .catch((error) => console.error(error));
   }, [conversationId]);
-  return (
+
+  return contactSelected ? (
     <div className="right-section">
       <RightSectionHeader />
       <div className="right-section__messages">
@@ -61,5 +55,42 @@ export default function RightSection() {
       </div>
       <RightSectionFooter />
     </div>
+  ) : (
+    <div className="right-section">
+      <figure>
+        <img src={background} alt="" />
+      </figure>
+    </div>
   );
+
+  // return (
+  //   <div className="right-section">
+  //     <RightSectionHeader />
+  //     <div className="right-section__messages">
+  //       <div className="right-section__message">
+  //         {messages?.map((message) => (
+  //           <Message
+  //             key={message._id}
+  //             text={message.message_text}
+  //             sender={message.message_sender}
+  //             image={message.message_image}
+  //             date={message.createdAt}
+  //           />
+  //         ))}
+
+  //         {tableSocketMessages?.map((message) => (
+  //           <Message
+  //             text={message.text}
+  //             sender={message.sender}
+  //             image={message.image}
+  //             date={message.date}
+  //           />
+  //         ))}
+
+  //         {/* <Message /> */}
+  //       </div>
+  //     </div>
+  //     <RightSectionFooter />
+  //   </div>
+  // );
 }
