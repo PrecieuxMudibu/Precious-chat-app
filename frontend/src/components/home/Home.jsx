@@ -18,6 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     // console.log('WINDOW LOCATION',window.location.pathname)
+                                      // REACT_APP_API_URL=http://localhost:3200
     const routeGetRecentConversation = `${process.env.REACT_APP_API_URL}/api/conversation/${id}`;
     axios
       .get(routeGetRecentConversation)

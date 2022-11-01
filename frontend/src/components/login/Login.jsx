@@ -9,10 +9,6 @@ import ConnectionRight from '../connectionRight/ConnectionRight';
 import { applicationContext } from '../../App';
 
 export default function Login() {
-  // if (process.env.NODE_ENV === "production") {
-  //     redirectUri = import.meta.env["VITE_REDIRECT_URI_PROD"]
-  // }
-  // const routeLogin = 'http://localhost:3200/api/login';
   const routeLogin = `${process.env.REACT_APP_API_URL}/api/login`;
 
   const navigate = useNavigate();
@@ -78,7 +74,7 @@ export default function Login() {
           />
         </form>
         <p className="connection__paragraph">
-          Vous n'avez pas de compte ?
+          Vous n'avez pas de compte ?{' '}
           <Link to="/register">Créez-en un par ici.</Link>
           {/* <p>Id de la personne connectée : {id}</p> */}
         </p>

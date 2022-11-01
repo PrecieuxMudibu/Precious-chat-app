@@ -14,11 +14,11 @@ body {
   box-sizing: border-box;
   background: #eaeaea;
   font-family: sans-serif;
+ 
 }
 
-/* .App {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-   */
+.App {
+  height: 100vh;
+  position: relative;
+}
+  
