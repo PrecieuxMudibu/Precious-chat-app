@@ -24,7 +24,6 @@ export default function Home() {
       .get(routeGetRecentConversation)
       .then((response) => {
         setConversations(response.data);
-        console.log('CONVERSATION', response.data);
       })
       .catch((error) => console.error(error));
   }, []);

@@ -37,7 +37,7 @@ export default function ContactsList() {
         <SearchBar />
         <div>
           <div className="middle-section__recent">
-            <h2 className="middle-section__second-title">Recent</h2>
+            <h2 className="middle-section__second-title">Contacts</h2>
             <ul>
               {users.map((user) => (
                 <Contact

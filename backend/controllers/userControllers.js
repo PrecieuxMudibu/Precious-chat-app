@@ -11,7 +11,7 @@ exports.register = (request, response, next) => {
                 user_email: request.body.user_email,
                 user_password: hash,
                 user_profile_picture:
-                    'https://www.super-blagues.fr/assets/images/profil/profil_defaut.png',
+                    'https://res.cloudinary.com/dzci2uq4z/image/upload/v1667309524/testFolder/avatar-removebg-preview_tkr7b0.png',
             });
             user.save()
                 .then(() =>

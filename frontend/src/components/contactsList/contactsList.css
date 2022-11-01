@@ -25,6 +25,7 @@
   padding-top: 8%;
   overflow-y: scroll;
   scrollbar-width: none;
+  flex-direction: column;
 }
 
 .middle-section__second-title {
