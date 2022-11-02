@@ -10,7 +10,7 @@ import { applicationContext } from '../../App';
 import background from '../../images/background.png';
 
 export default function RightSection() {
-  const { conversationId, tableSocketMessages, contactSelected } =
+  const { conversationId, tableSocketMessages, contactSelected, token } =
     useContext(applicationContext);
   const [messages, setMessages] = useState();
 
@@ -18,8 +18,13 @@ export default function RightSection() {
     // const routeGetAllMessages = `http://localhost:3200/api/message/${conversationId}`;
     const routeGetAllMessages = `${process.env.REACT_APP_API_URL}/api/message/${conversationId}`;
 
-    axios
-      .get(routeGetAllMessages)
+    axios({
+      method: 'get',
+      url: routeGetAllMessages,
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((response) => {
         setMessages(response.data.messages);
       })
