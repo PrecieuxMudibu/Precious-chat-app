@@ -5,15 +5,20 @@ import axios from 'axios';
 import { applicationContext } from '../../App';
 
 export default function RightSectionHeader() {
-  const { contactIdentifiant } = useContext(applicationContext);
+  const { contactIdentifiant, token } = useContext(applicationContext);
   const [contactInfo,setContactInfo] = useState({});
 
   useEffect(() => {
     // const routeGetUser = `http://localhost:3200/api/users/${contactIdentifiant}`;
     const routeGetUser = `${process.env.REACT_APP_API_URL}/api/user/${contactIdentifiant}`;
 
-    axios
-      .get(routeGetUser)
+    axios({
+      method: 'get',
+      url: routeGetUser,
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((response) => {
         setContactInfo(response.data);
       })

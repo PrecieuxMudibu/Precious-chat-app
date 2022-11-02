@@ -16,15 +16,20 @@ export default function LeftSection() {
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
   const [profilePicture, setProfilePicture] = useState('');
-  const { id, setContactSelected, setId, setToken } =
+  const { id, setContactSelected, setId, setToken, token } =
     useContext(applicationContext);
 
   const routeGetCurrentUserInfo = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
   useEffect(() => {
     setId(localStorage.getItem('id'));
     setToken(localStorage.getItem('token'));
-    axios
-      .get(routeGetCurrentUserInfo)
+    axios({
+      method: 'get',
+      url: routeGetCurrentUserInfo,
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((response) => {
         setProfilePicture(response.data.user_profile_picture);
       })

@@ -7,7 +7,7 @@ router.post('/register', userControllers.register);
 router.post('/login', userControllers.login);
 router.get('/users/:id', passport.authenticate('jwt', { session: false }), userControllers.getAllUsersExceptCurrentUser);
 // router.get('/users', userControllers.getAllUsers);
-router.get('/user/:id', userControllers.getUser);
+router.get('/user/:id',passport.authenticate('jwt', { session: false }), userControllers.getUser);
 router.put('/user/:id', userControllers.updateUser);
 
 module.exports = router;
