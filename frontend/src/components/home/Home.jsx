@@ -11,7 +11,7 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function Home() {
-  const { setId, id } = useContext(applicationContext);
+  const { setId, id, token } = useContext(applicationContext);
   setId(localStorage.getItem('id'));
   // eslint-disable-next-line
   const [conversations, setConversations] = useState([]);
@@ -20,8 +20,13 @@ export default function Home() {
     // console.log('WINDOW LOCATION',window.location.pathname)
                                       // REACT_APP_API_URL=http://localhost:3200
     const routeGetRecentConversation = `${process.env.REACT_APP_API_URL}/api/conversation/${id}`;
-    axios
-      .get(routeGetRecentConversation)
+    axios({
+      method: 'get',
+      url: routeGetRecentConversation,
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((response) => {
         setConversations(response.data);
       })
