@@ -12,8 +12,13 @@ export default function Contact({
   contactProfilePicture,
   contactText,
 }) {
-  const { id, setConversationId, setContactIdentifiant, setContactSelected } =
-    useContext(applicationContext);
+  const {
+    id,
+    setConversationId,
+    setContactIdentifiant,
+    setContactSelected,
+    token,
+  } = useContext(applicationContext);
 
   // const routeFindOrCreateConversation =
   //     'http://localhost:3200/api/conversation';
@@ -21,19 +26,25 @@ export default function Contact({
 
   function getConversation() {
     setContactIdentifiant(contactId);
-    axios
-      .post(routeFindOrCreateConversation, {
+
+    axios({
+      method: 'post',
+      url: routeFindOrCreateConversation,
+      data: {
         message_sender: id,
         message_recipient: contactId,
-      })
-      .then((response) => {
-        if (response.statusText === 'Created') {
-          setConversationId(response.data.conversation._id);
-        } else if (response.statusText === 'OK') {
-          setConversationId(response.data.data[0]._id);
-        }
-      });
-      setContactSelected(true)
+      },
+      headers: {
+        Authorization: token,
+      },
+    }).then((response) => {
+      if (response.statusText === 'Created') {
+        setConversationId(response.data.conversation._id);
+      } else if (response.statusText === 'OK') {
+        setConversationId(response.data.data[0]._id);
+      }
+    });
+    setContactSelected(true);
     // .catch((error) => console.error('Erreur trouvée', error));
   }
 
