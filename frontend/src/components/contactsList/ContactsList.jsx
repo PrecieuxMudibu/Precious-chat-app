@@ -12,7 +12,7 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function ContactsList() {
-  const { setId, id } = useContext(applicationContext);
+  const { setId, id, token } = useContext(applicationContext);
   setId(localStorage.getItem('id'));
   const [users, setUsers] = useState([]);
 
@@ -20,8 +20,14 @@ export default function ContactsList() {
     if (window.location.pathname === '/contacts') {
       // const routeGetAllUsers = `${process.env.REACT_APP_API_URL}/api/users`;
       const routeGetAllUsersExceptCurrentUser = `${process.env.REACT_APP_API_URL}/api/users/${id}`;
-      axios
-        .get(routeGetAllUsersExceptCurrentUser)
+
+      axios({
+        method: 'get',
+        url: routeGetAllUsersExceptCurrentUser,
+        headers: {
+          Authorization: token,
+        },
+      })
         .then((response) => {
           setUsers(response.data.users);
         })

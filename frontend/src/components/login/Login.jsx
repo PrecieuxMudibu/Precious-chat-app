@@ -12,6 +12,7 @@ export default function Login() {
   const routeLogin = `${process.env.REACT_APP_API_URL}/api/login`;
 
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const { setToken, id, setId } = useContext(applicationContext);
 
   const handleClick = () => {
@@ -35,8 +36,8 @@ export default function Login() {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.id);
 
-        setId(localStorage.getItem('id'));
-        setToken(localStorage.getItem('token'));
+        // setId(localStorage.getItem('id'));
+        // setToken(localStorage.getItem('token'));
         handleClick();
       })
       .catch((error) => {

@@ -16,10 +16,13 @@ export default function LeftSection() {
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
   const [profilePicture, setProfilePicture] = useState('');
-  const { id,  setContactSelected} = useContext(applicationContext);
+  const { id, setContactSelected, setId, setToken } =
+    useContext(applicationContext);
 
   const routeGetCurrentUserInfo = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
   useEffect(() => {
+    setId(localStorage.getItem('id'));
+    setToken(localStorage.getItem('token'));
     axios
       .get(routeGetCurrentUserInfo)
       .then((response) => {
@@ -31,7 +34,7 @@ export default function LeftSection() {
   function logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
-    setContactSelected(false)
+    setContactSelected(false);
     navigate('/login');
   }
 
@@ -47,7 +50,10 @@ export default function LeftSection() {
         console.log('MISE A JOUR DANS LA BASE DE DONNEES', response)
       )
       .catch((error) =>
-        console.error('ECHEC DE MISE A JOUR DANS LA BASE DE DONNEES ECHOUEE', error)
+        console.error(
+          'ECHEC DE MISE A JOUR DANS LA BASE DE DONNEES ECHOUEE',
+          error
+        )
       );
   }
 
