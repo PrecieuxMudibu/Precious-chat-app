@@ -49,6 +49,15 @@ export default function LeftSection() {
 
   async function updateProfileInDatabase(data) {
     const routeUpdateUser = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
+    axios({
+      method: 'put',
+      url: routeUpdateUser,
+      data: { user_profile_picture: data },
+      headers: {
+        Authorization: token,
+      },
+    });
+
     await axios
       .put(routeUpdateUser, { user_profile_picture: data })
       .then((response) =>
@@ -68,6 +77,7 @@ export default function LeftSection() {
     formData.append('file', fileInfo);
 
     formData.append('upload_preset', 'testPresetName');
+
     axios
       .post(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,

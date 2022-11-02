@@ -8,6 +8,6 @@ router.post('/login', userControllers.login);
 router.get('/users/:id', passport.authenticate('jwt', { session: false }), userControllers.getAllUsersExceptCurrentUser);
 // router.get('/users', userControllers.getAllUsers);
 router.get('/user/:id',passport.authenticate('jwt', { session: false }), userControllers.getUser);
-router.put('/user/:id', userControllers.updateUser);
+router.put('/user/:id', passport.authenticate('jwt', { session: false }),userControllers.updateUser);
 
 module.exports = router;
