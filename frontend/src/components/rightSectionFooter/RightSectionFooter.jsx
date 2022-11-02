@@ -21,6 +21,7 @@ export default function RightSectionFooter() {
     conversationId,
     tableSocketMessages,
     setTableSocketMessages,
+    token
   } = useContext(applicationContext);
   const [messageText, setMessageText] = useState('');
   const [fileChoosen, setFileChoosen] = useState(false);
@@ -54,7 +55,7 @@ export default function RightSectionFooter() {
 
   async function sendMessage() {
     // console.log("SEND MESSAGE",messageText)
-    setMessageSended(false)
+    setMessageSended(false);
     const message = {
       text: messageText,
       image: '',
@@ -90,8 +91,10 @@ export default function RightSectionFooter() {
     setTest(message.image);
     setTableSocketMessages([...tableSocketMessages, message]);
     socket.emit('send-message', message, tableSocketMessages);
-    await axios
-      .post(routeSendMessage, {
+    axios({
+      method: 'post',
+      url: routeSendMessage,
+      data: {
         message_text: messageText,
         // message_image: '',
         message_image: message.image,
@@ -99,7 +102,11 @@ export default function RightSectionFooter() {
         message_sender: id,
         message_recipient: contactIdentifiant,
         conversation_id: conversationId,
-      })
+      },
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((response) => {
         console.log(response);
       })
@@ -110,8 +117,7 @@ export default function RightSectionFooter() {
     inputMessage.current.value = '';
     setMessageText('');
     setLocalLink('');
-    setMessageSended(true)
-
+    setMessageSended(true);
   }
 
   function uploadImage(files) {

@@ -56,10 +56,7 @@ export default function LeftSection() {
       headers: {
         Authorization: token,
       },
-    });
-
-    await axios
-      .put(routeUpdateUser, { user_profile_picture: data })
+    })
       .then((response) =>
         console.log('MISE A JOUR DANS LA BASE DE DONNEES', response)
       )
