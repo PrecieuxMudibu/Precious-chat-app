@@ -19,6 +19,7 @@ function App() {
   const [contactIdentifiant, setContactIdentifiant] = useState('');
   const [tableSocketMessages, setTableSocketMessages] = useState([]);
   const [contactSelected, setContactSelected] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
@@ -39,6 +40,8 @@ function App() {
           setTableSocketMessages,
           contactSelected,
           setContactSelected,
+          showPicker,
+          setShowPicker,
         }}
       >
         <Routes>

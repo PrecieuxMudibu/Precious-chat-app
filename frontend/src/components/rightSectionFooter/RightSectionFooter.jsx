@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 
+import Picker from 'emoji-picker-react';
 // eslint-disable-next-line no-unused-vars
 import { AiOutlineSend } from 'react-icons/ai';
 // eslint-disable-next-line no-unused-vars
@@ -10,7 +11,6 @@ import axios from 'axios';
 import { useState, useEffect, useContext, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { applicationContext } from '../../App';
-// import image from '../../images/profile.jpg'
 
 const socket = io('http://localhost:3200');
 
@@ -21,109 +21,111 @@ export default function RightSectionFooter() {
     conversationId,
     tableSocketMessages,
     setTableSocketMessages,
-    token
+    showPicker,
+    setShowPicker,
+    token,
   } = useContext(applicationContext);
   const [messageText, setMessageText] = useState('');
   const [fileChoosen, setFileChoosen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [messageSended, setMessageSended] = useState(true);
   const [test, setTest] = useState('');
   const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
   const inputFile = useRef();
   const [fileInfo, setFileInfo] = useState({});
-  // const routeSendMessage = 'http://localhost:3200/api/message';
   const routeSendMessage = `${process.env.REACT_APP_API_URL}/api/message`;
   socket.on('connect', () => {
     console.log(`You are connected with: ${socket.id}`);
   });
 
   useEffect(() => {
-    // rejoindre la room
     socket.emit('join-room', conversationId);
-
     setTableSocketMessages([]);
   }, [conversationId]);
 
   // eslint-disable-next-line no-shadow
   socket.on('receive-message', (message, tableSocketMessages) => {
-    // console.log('MESSAGE RECU DANS LA ROOM',message.text);
-
-    // A DECOMMENTER
     setTableSocketMessages([...tableSocketMessages, message]);
   });
 
   async function sendMessage() {
     // console.log("SEND MESSAGE",messageText)
-    setMessageSended(false);
-    const message = {
-      text: messageText,
-      image: '',
-      sender: id,
-      message_recipient: contactIdentifiant,
-      conversation_id: conversationId,
-      room: conversationId,
-    };
 
-    if (fileChoosen) {
-      let imageUrl;
-      const cloudName = 'dzci2uq4z';
-      const formData = new FormData();
-      formData.append('file', fileInfo);
-      // console.log('FILE INFO', fileInfo);
-
-      formData.append('upload_preset', 'testPresetName');
-      // console.log('FORM DATA', formData);
-      await axios
-        .post(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          formData
-        )
-        .then((response) => {
-          imageUrl = response.data.secure_url;
-          console.log('URL', response.data.secure_url);
-          console.log('IMAGE URL', imageUrl);
-          // return response.data.secure_url;
-        });
-      setFileChoosen(false);
-      message.image = imageUrl;
-    }
-    setTest(message.image);
-    setTableSocketMessages([...tableSocketMessages, message]);
-    socket.emit('send-message', message, tableSocketMessages);
-    axios({
-      method: 'post',
-      url: routeSendMessage,
-      data: {
-        message_text: messageText,
-        // message_image: '',
-        message_image: message.image,
-        message_date: '',
-        message_sender: id,
+    if (messageText !== '') {setMessageSended(false);
+      const message = {
+        text: messageText,
+        image: '',
+        sender: id,
         message_recipient: contactIdentifiant,
         conversation_id: conversationId,
-      },
-      headers: {
-        Authorization: token,
-      },
-    })
-      .then((response) => {
-        console.log(response);
+        room: conversationId,
+      };
+  
+      if (fileChoosen) {
+        let imageUrl;
+        const cloudName = 'dzci2uq4z';
+        const formData = new FormData();
+        formData.append('file', fileInfo);
+        // console.log('FILE INFO', fileInfo);
+  
+        formData.append('upload_preset', 'testPresetName');
+        console.log('FORM DATA', formData);
+        await axios
+          .post(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+            formData
+          )
+          .then((response) => {
+            imageUrl = response.data.secure_url;
+            console.log('URL', response.data.secure_url);
+            console.log('IMAGE URL', imageUrl);
+            // return response.data.secure_url;
+          });
+        setFileChoosen(false);
+        message.image = imageUrl;
+      }
+      setTest(message.image);
+      setTableSocketMessages([...tableSocketMessages, message]);
+      socket.emit('send-message', message, tableSocketMessages);
+      axios({
+        method: 'post',
+        url: routeSendMessage,
+        data: {
+          message_text: messageText,
+          message_image: message.image,
+          message_sender: id,
+          message_recipient: contactIdentifiant,
+          conversation_id: conversationId,
+        },
+        headers: {
+          Authorization: token,
+        },
       })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    inputMessage.current.value = '';
-    setMessageText('');
-    setLocalLink('');
-    setMessageSended(true);
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  
+      inputMessage.current.value = '';
+      setMessageText('');
+      setLocalLink('');
+      setMessageSended(true);
+      setShowPicker(false);}
+    
   }
 
   function uploadImage(files) {
     setFileInfo(files[0]);
     setFileChoosen(true);
     setLocalLink(URL.createObjectURL(files[0]));
+  }
+
+  function onEmojiClick(emojiObject) {
+    console.log(emojiObject);
+    setMessageText((prevInput) => prevInput + emojiObject.emoji);
+    // setShowPicker(false);
   }
 
   return (
@@ -134,18 +136,31 @@ export default function RightSectionFooter() {
           <img src={localLink} alt="" />
         </div>
       ) : null}
+      {showPicker ? (
+        <div className="right-section__emoji-list">
+          <Picker pickerStyle={{ width: '100%' }} onEmojiClick={onEmojiClick} />
+        </div>
+      ) : null}
       <div className="right-section__footer">
         {console.log('IMAGE', test)}
 
         <div>
+          {/* {showPicker ? <Picker
+          pickerStyle={{ width: '100%' }}
+          onEmojiClick={onEmojiClick} /> : null} */}
           <textarea
             className="right-section__text-area"
             rows="1"
+            value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
             ref={inputMessage}
           />
           <span className="right-section__icons">
-            <BsEmojiLaughing className="icon-emoji" />
+            <BsEmojiLaughing
+              className="icon-emoji"
+              onClick={() => setShowPicker(true)}
+              onBlur={() => setShowPicker(false)}
+            />
             <input
               ref={inputFile}
               className="input__image-selected"
@@ -190,3 +205,40 @@ export default function RightSectionFooter() {
     </>
   );
 }
+
+// import React, { useState } from 'react';
+// import Picker from 'emoji-picker-react';
+// // import './App.css';
+
+// function EmojiPickerTest() {
+
+//   const [inputStr, setInputStr] = useState('');
+//   const [showPicker, setShowPicker] = useState(false);
+
+//   const onEmojiClick = (emojiObject) => {
+//     console.log(emojiObject)
+//     setInputStr(prevInput => prevInput + emojiObject.emoji);
+//     setShowPicker(false);
+//   };
+
+//   return (
+//     <div className="app">
+//       <h3>Add Emoji Picker</h3>
+//       <div className="picker-container">
+//         <input
+//           className="input-style"
+//           value={inputStr}
+//           onChange={e => setInputStr(e.target.value)} />
+//         <img
+//           className="emoji-icon"
+//           src="https://icons.getbootstrap.com/assets/icons/emoji-smile.svg"
+//           onClick={() => setShowPicker(val => !val)} />
+//         {showPicker && <Picker
+//           pickerStyle={{ width: '100%' }}
+//           onEmojiClick={onEmojiClick} />}
+//       </div>
+//       {inputStr}
+//     </div>
+//   );
+// }
+// export default EmojiPickerTest;

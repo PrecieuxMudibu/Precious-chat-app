@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 import axios from 'axios';
@@ -10,7 +11,7 @@ import { applicationContext } from '../../App';
 import background from '../../images/background.png';
 
 export default function RightSection() {
-  const { conversationId, tableSocketMessages, contactSelected, token } =
+  const { conversationId, tableSocketMessages, contactSelected,showPicker, setShowPicker, token } =
     useContext(applicationContext);
   const [messages, setMessages] = useState();
 
@@ -34,7 +35,7 @@ export default function RightSection() {
   return contactSelected ? (
     <div className="right-section">
       <RightSectionHeader />
-      <div className="right-section__messages">
+      <div className="right-section__messages" onClick={()=>setShowPicker(false)}>
         <div className="right-section__message">
           {messages?.map((message) => (
             <Message
