@@ -17,6 +17,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [emptyField, setEmptyField] = useState(true);
   // let name;
   // Saisissez correctement votre mot de passe
   // let email;
@@ -29,32 +30,39 @@ export default function Register() {
   function createPost(e) {
     e.preventDefault();
 
+    // Chècker si les champs sont vides pa une boucle
+    // Si aucun champ
+
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < 4; i++) {
       if (e.target[i].value === '') {
         e.target[i].style.borderBottom = '1px solid #FF3838';
+        setEmptyField(true);
       } else {
         e.target[i].style.borderBottom = '1px solid grey';
         setName(e.target[0].value);
         setEmail(e.target[1].value);
         setPassword(e.target[2].value);
         setConfirmPassword(e.target[3].value);
+        setEmptyField(false);
+      }
+    }
 
-        if (e.target[2].value === e.target[3].value) {
-          axios
-            .post(routeRegister, {
-              user_name: e.target[0].value,
-              user_email: e.target[1].value,
-              user_password: e.target[2].value,
-            })
-            .then((response) => {
-              console.log(response);
-              handleClick();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
+    if (emptyField === false) {
+      if (e.target[2].value === e.target[3].value) {
+        axios
+          .post(routeRegister, {
+            user_name: e.target[0].value,
+            user_email: e.target[1].value,
+            user_password: e.target[2].value,
+          })
+          .then((response) => {
+            console.log(response);
+            handleClick();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     }
   }
