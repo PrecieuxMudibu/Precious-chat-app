@@ -6,11 +6,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import './register.css';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
+// eslint-disable-next-line import/no-cycle
+import { applicationContext } from '../../App';
 import ConnectionRight from '../connectionRight/ConnectionRight';
 
 export default function Register() {
-  // const routeRegister = 'http://localhost:3200/api/register';
+  const {setId, setToken} = useContext(applicationContext)
   const navigate = useNavigate();
   const routeRegister = `${process.env.REACT_APP_API_URL}/api/register`;
   const [name, setName] = useState('');
@@ -57,7 +59,9 @@ export default function Register() {
             user_password: e.target[2].value,
           })
           .then((response) => {
-            console.log(response);
+            console.log('INSCRIPTION',response);
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('id', response.data.id);
             handleClick();
           })
           .catch((error) => {

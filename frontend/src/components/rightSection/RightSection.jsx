@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-cycle */
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState,useRef } from 'react';
 import RightSectionFooter from '../rightSectionFooter/RightSectionFooter';
 import RightSectionHeader from '../rightSectionHeader/RightSectionHeader';
 import Message from '../message/Message';
@@ -14,6 +14,7 @@ export default function RightSection() {
   const { conversationId, tableSocketMessages, contactSelected,showPicker, setShowPicker, token } =
     useContext(applicationContext);
   const [messages, setMessages] = useState();
+
 
   useEffect(() => {
     // const routeGetAllMessages = `http://localhost:3200/api/message/${conversationId}`;
@@ -30,7 +31,8 @@ export default function RightSection() {
         setMessages(response.data.messages);
       })
       .catch((error) => console.error(error));
-  }, [conversationId]);
+
+    }, [conversationId]);
 
   return contactSelected ? (
     <div className="right-section">

@@ -14,9 +14,23 @@ exports.register = (request, response, next) => {
                     'https://res.cloudinary.com/dzci2uq4z/image/upload/v1667309524/testFolder/avatar-removebg-preview_tkr7b0.png',
             });
             user.save()
-                .then(() =>
-                    response.status(201).json({ message: 'Utilisateur créé !' })
-                )
+                .then(() => {
+                    // response.status(201).json({ message: 'Utilisateur créé !' })
+                    const payload = {
+                        user_name: user.user_name,
+                        id: user._id,
+                    };
+
+                    const token = jwt.sign(payload, 'NEVER GIVE UP', {
+                        expiresIn: '1d',
+                    });
+
+                    return response.status(200).json({
+                        message: 'Utilisateur créé !',
+                        token: 'Bearer ' + token,
+                        id: payload.id,
+                    });
+                })
                 .catch((error) => {
                     response.status(400).json({ error });
                 });
@@ -102,7 +116,8 @@ exports.updateUser = (request, response) => {
         new: true,
     })
         .then((user) => {
-            message: 'Votre profil a été mis à jour avec succès', response.status(200).json(user);
+            message: 'Votre profil a été mis à jour avec succès',
+                response.status(200).json(user);
         })
         .catch((error) => response.status(500).json(error));
 };

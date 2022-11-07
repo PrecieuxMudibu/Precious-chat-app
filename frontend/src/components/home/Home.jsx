@@ -61,11 +61,10 @@ export default function Home() {
                     }
                     contactProfilePicture={
                       conversation.conversation_participants[0]._id === id
-                        ? conversation.conversation_participants[1].user_profile_picture
-                        : conversation.conversation_participants[0].user_profile_picture
-
-                      // conversation.conversation_participants[0]
-                      //   .user_profile_picture
+                        ? conversation.conversation_participants[1]
+                            .user_profile_picture
+                        : conversation.conversation_participants[0]
+                            .user_profile_picture
                     }
                     contactText={
                       'conversation_last_message' in conversation

@@ -31,10 +31,13 @@ export default function Message({ text, sender, image, date }) {
         {image !== '' ? (
           <img src={image} className="message__photo" alt="" />
         ) : null}
-        <p className="message__content">
-          {text}
-          <br />
-        </p>
+
+        {text === '' ? null : (
+          <p className="message__content">
+            {text}
+            <br />
+          </p>
+        )}
 
         <div className={hornStyle} />
       </div>

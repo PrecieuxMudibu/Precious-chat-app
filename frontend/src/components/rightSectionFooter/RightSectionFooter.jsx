@@ -51,8 +51,6 @@ export default function RightSectionFooter() {
   });
 
   async function sendMessage() {
-    // console.log("SEND MESSAGE",messageText)
-
     if (messageText !== '' || fileChoosen !== false) {
       setMessageToSend(true);
     }
@@ -121,7 +119,6 @@ export default function RightSectionFooter() {
       setMessageSended(true);
       setShowPicker(false);
       setMessageToSend(false);
-
     }
   }
 
@@ -134,7 +131,6 @@ export default function RightSectionFooter() {
   function onEmojiClick(emojiObject) {
     console.log(emojiObject);
     setMessageText((prevInput) => prevInput + emojiObject.emoji);
-    // setShowPicker(false);
   }
 
   return (
@@ -154,9 +150,6 @@ export default function RightSectionFooter() {
         {console.log('IMAGE', test)}
 
         <div>
-          {/* {showPicker ? <Picker
-          pickerStyle={{ width: '100%' }}
-          onEmojiClick={onEmojiClick} /> : null} */}
           <textarea
             className="right-section__text-area"
             rows="1"
@@ -208,46 +201,8 @@ export default function RightSectionFooter() {
               className="send-loader"
             />
           )}
-          {/* <AiOutlineSend className='send-icon'/> */}
         </button>
       </div>
     </>
   );
 }
-
-// import React, { useState } from 'react';
-// import Picker from 'emoji-picker-react';
-// // import './App.css';
-
-// function EmojiPickerTest() {
-
-//   const [inputStr, setInputStr] = useState('');
-//   const [showPicker, setShowPicker] = useState(false);
-
-//   const onEmojiClick = (emojiObject) => {
-//     console.log(emojiObject)
-//     setInputStr(prevInput => prevInput + emojiObject.emoji);
-//     setShowPicker(false);
-//   };
-
-//   return (
-//     <div className="app">
-//       <h3>Add Emoji Picker</h3>
-//       <div className="picker-container">
-//         <input
-//           className="input-style"
-//           value={inputStr}
-//           onChange={e => setInputStr(e.target.value)} />
-//         <img
-//           className="emoji-icon"
-//           src="https://icons.getbootstrap.com/assets/icons/emoji-smile.svg"
-//           onClick={() => setShowPicker(val => !val)} />
-//         {showPicker && <Picker
-//           pickerStyle={{ width: '100%' }}
-//           onEmojiClick={onEmojiClick} />}
-//       </div>
-//       {inputStr}
-//     </div>
-//   );
-// }
-// export default EmojiPickerTest;
