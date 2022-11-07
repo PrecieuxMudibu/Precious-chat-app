@@ -12,7 +12,8 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { applicationContext } from '../../App';
 
-const socket = io('http://localhost:3200');
+// const socket = io('http://localhost:3200');
+const socket = io(`${process.env.REACT_APP_API_URL}`);
 
 export default function RightSectionFooter() {
   const {

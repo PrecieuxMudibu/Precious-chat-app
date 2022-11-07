@@ -29,7 +29,7 @@ export default function Home() {
         setConversations(response.data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [id]);
 
   return (
     <div className="home">
@@ -48,18 +48,24 @@ export default function Home() {
                     key={conversation.conversation_participants[0]._id}
                     // eslint-disable-next-line
                     // key={index}
-                    contactId={conversation.conversation_participants[0]._id}
-                    // contactName={
-                    //   conversation.conversation_participants[0].user_name
-                    // }
+                    // contactId={conversation.conversation_participants[0]._id}
+                    contactId={
+                      conversation.conversation_participants[0]._id === id
+                        ? conversation.conversation_participants[1]._id
+                        : conversation.conversation_participants[0]._id
+                    }
                     contactName={
                       conversation.conversation_participants[0]._id === id
                         ? conversation.conversation_participants[1].user_name
                         : conversation.conversation_participants[0].user_name
                     }
                     contactProfilePicture={
-                      conversation.conversation_participants[0]
-                        .user_profile_picture
+                      conversation.conversation_participants[0]._id === id
+                        ? conversation.conversation_participants[1].user_profile_picture
+                        : conversation.conversation_participants[0].user_profile_picture
+
+                      // conversation.conversation_participants[0]
+                      //   .user_profile_picture
                     }
                     contactText={
                       'conversation_last_message' in conversation
