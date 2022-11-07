@@ -28,6 +28,7 @@ export default function RightSectionFooter() {
   const [messageText, setMessageText] = useState('');
   const [fileChoosen, setFileChoosen] = useState(false);
   const [messageSended, setMessageSended] = useState(true);
+  const [messageToSend, setMessageToSend] = useState(false);
   const [test, setTest] = useState('');
   const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
@@ -51,7 +52,12 @@ export default function RightSectionFooter() {
   async function sendMessage() {
     // console.log("SEND MESSAGE",messageText)
 
-    if (messageText !== '') {setMessageSended(false);
+    if (messageText !== '' || fileChoosen !== false) {
+      setMessageToSend(true);
+    }
+
+    if (messageToSend) {
+      setMessageSended(false);
       const message = {
         text: messageText,
         image: '',
@@ -60,14 +66,14 @@ export default function RightSectionFooter() {
         conversation_id: conversationId,
         room: conversationId,
       };
-  
+
       if (fileChoosen) {
         let imageUrl;
         const cloudName = 'dzci2uq4z';
         const formData = new FormData();
         formData.append('file', fileInfo);
         // console.log('FILE INFO', fileInfo);
-  
+
         formData.append('upload_preset', 'testPresetName');
         console.log('FORM DATA', formData);
         await axios
@@ -107,13 +113,15 @@ export default function RightSectionFooter() {
         .catch((error) => {
           console.log(error);
         });
-  
+
       inputMessage.current.value = '';
       setMessageText('');
       setLocalLink('');
       setMessageSended(true);
-      setShowPicker(false);}
-    
+      setShowPicker(false);
+      setMessageToSend(false);
+
+    }
   }
 
   function uploadImage(files) {
