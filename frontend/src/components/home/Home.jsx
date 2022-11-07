@@ -17,8 +17,6 @@ export default function Home() {
   const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
-    // console.log('WINDOW LOCATION',window.location.pathname)
-                                      // REACT_APP_API_URL=http://localhost:3200
     const routeGetRecentConversation = `${process.env.REACT_APP_API_URL}/api/conversation/${id}`;
     axios({
       method: 'get',
@@ -51,26 +49,22 @@ export default function Home() {
                     // eslint-disable-next-line
                     // key={index}
                     contactId={conversation.conversation_participants[0]._id}
+                    // contactName={
+                    //   conversation.conversation_participants[0].user_name
+                    // }
                     contactName={
-                      conversation.conversation_participants[0].user_name
+                      conversation.conversation_participants[0]._id === id
+                        ? conversation.conversation_participants[1].user_name
+                        : conversation.conversation_participants[0].user_name
                     }
                     contactProfilePicture={
                       conversation.conversation_participants[0]
                         .user_profile_picture
                     }
-                    // var obj = { one : 1, two : 2, three : 3 };
-                    // var key = 'two';
-
-                    // var hasKey = key in obj;
-                    // console.log(hasKey);
                     contactText={
                       'conversation_last_message' in conversation
                         ? conversation.conversation_last_message.message_text
                         : null
-                        // ? console.log('TROUVE')
-                        // :console.log('ASTROUVE')
-                      // conversation.conversation_last_message.message_text
-                      // 'alllo'
                     }
                   />
                 ))}

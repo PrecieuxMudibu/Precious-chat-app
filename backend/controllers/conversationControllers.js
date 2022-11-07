@@ -1,4 +1,4 @@
-const { response } = require('express');
+// const { response } = require('express');
 const Conversation = require('../models/conversationModel');
 const Message = require('../models/messageModel');
 const User = require('../models/userModel');
@@ -55,41 +55,13 @@ exports.findOrCreateConversation = (request, response) => {
 };
 
 exports.getRecentConversation = (request, response) => {
-    let tableConversation = [];
-    let tableConversationFinal = [];
-
     Conversation.find({
         conversation_participants: { $in: [request.params._id] },
-        // conversation_participants: [request.body.current_user],
     })
         .populate('conversation_participants')
         .populate('conversation_last_message')
 
-        // .then((conversation) => response.status(200).json(conversation))
-        .then((conversation) => {
-            let tableConversation = conversation;
-            console.log(conversation);
-
-            // const colors = ['red', 'green', 'blue', 'yellow'];
-            // colors.splice(2, 1);
-
-            // console.log(colors);
-            // // Output: ['red', 'green', 'yellow']
-
-            for (let i = 0; i < tableConversation.length; i++) {
-                if (
-                    tableConversation[i].conversation_participants[0]._id !==
-                    request.params._id
-                ) {
-                    // console.log(tableConversation[i].conversation_participants[0]._id)
-                    tableConversation[i].conversation_participants.splice(0, 1);
-                } else {
-                    tableConversation[i].conversation_participants.splice(1, 1);
-                }
-            }
-            response.status(200).json(tableConversation);
-        })
-        // .then((conversation) => response.status(200).json(conversation[0].conversation_participants))
+        .then((conversation) => response.status(200).json(conversation))
 
         .catch((error) =>
             response.status(500).json({
