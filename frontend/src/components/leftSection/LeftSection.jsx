@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { useRef, useState, useEffect, useContext } from 'react';
 import { AiFillMessage } from 'react-icons/ai';
 // import { GrLogout } from 'react-icons/gr';
 import { RiLogoutBoxRFill, RiContactsFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import { ColorRing } from 'react-loader-spinner';
 // eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
 // import profilePicture from '../../images/profile.jpg';
@@ -16,6 +18,7 @@ export default function LeftSection() {
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
   const [profilePicture, setProfilePicture] = useState('');
+  const [profilePictureUpdated, setProfilePictureUpdated] = useState(true);
   const { id, setContactSelected, setId, setToken, token } =
     useContext(applicationContext);
 
@@ -69,10 +72,11 @@ export default function LeftSection() {
   }
 
   async function changeProfilePicture() {
+    setProfilePictureUpdated(false);
+
     const cloudName = 'dzci2uq4z';
     const formData = new FormData();
     formData.append('file', fileInfo);
-
     formData.append('upload_preset', 'testPresetName');
 
     axios
@@ -83,6 +87,7 @@ export default function LeftSection() {
       .then((response) => {
         setProfilePicture(response.data.secure_url);
         updateProfileInDatabase(response.data.secure_url);
+        setProfilePictureUpdated(true);
       });
     setFileChoosen(false);
   }
@@ -93,14 +98,30 @@ export default function LeftSection() {
     setFileInfo(files[0]);
     setFileChoosen(true);
   }
+
   return (
     <div className="left-section">
-      <img
-        src={profilePicture}
-        alt="profil"
-        className="left-section__profile-picture"
-        onClick={() => pictureFile.current.click()}
-      />
+      {profilePictureUpdated === true ? (
+          <img
+            src={profilePicture}
+            alt="profil"
+            className="left-section__profile-picture"
+            onClick={() => pictureFile.current.click()}
+          />
+      ) : (
+        <div className="update-profile-picture-loader">
+          <ColorRing
+            visible
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['white', 'white', 'white', 'white', 'white']}
+          />
+        </div>
+      )}
+
       <input
         ref={pictureFile}
         type="file"

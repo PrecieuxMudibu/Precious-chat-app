@@ -78,3 +78,8 @@ li {
 .inputFile {
   display: none;
 }
+
+.update-profile-picture-loader {
+  margin-top: 20%;
+  align-self: center;
+}
