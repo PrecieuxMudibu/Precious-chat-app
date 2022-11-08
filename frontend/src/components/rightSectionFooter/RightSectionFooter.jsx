@@ -123,6 +123,7 @@ export default function RightSectionFooter() {
   }
 
   function uploadImage(files) {
+    console.log('IMAGEEEEEEEEEEEEE',files[0])
     setFileInfo(files[0]);
     setFileChoosen(true);
     setLocalLink(URL.createObjectURL(files[0]));
