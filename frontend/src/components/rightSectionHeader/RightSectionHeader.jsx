@@ -1,15 +1,15 @@
 /* eslint-disable import/no-cycle */
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-// import profilePicture from '../../images/profile.jpg';
 import { applicationContext } from '../../App';
+import './rightSectionHeader.css';
+
 
 export default function RightSectionHeader() {
   const { contactIdentifiant, token } = useContext(applicationContext);
   const [contactInfo,setContactInfo] = useState({});
 
   useEffect(() => {
-    // const routeGetUser = `http://localhost:3200/api/users/${contactIdentifiant}`;
     const routeGetUser = `${process.env.REACT_APP_API_URL}/api/user/${contactIdentifiant}`;
 
     axios({
