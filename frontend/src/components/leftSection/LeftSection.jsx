@@ -8,7 +8,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
 // eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
-// import profilePicture from '../../images/profile.jpg';
 import './leftSection.css';
 
 export default function LeftSection() {
@@ -38,7 +37,6 @@ export default function LeftSection() {
       })
       .catch((error) => console.error(error));
   }, [id]);
-  // console.log(id);
   function logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
@@ -102,12 +100,12 @@ export default function LeftSection() {
   return (
     <div className="left-section">
       {profilePictureUpdated === true ? (
-          <img
-            src={profilePicture}
-            alt="profil"
-            className="left-section__profile-picture"
-            onClick={() => pictureFile.current.click()}
-          />
+        <img
+          src={profilePicture}
+          alt="profil"
+          className="left-section__profile-picture"
+          onClick={() => pictureFile.current.click()}
+        />
       ) : (
         <div className="update-profile-picture-loader">
           <ColorRing

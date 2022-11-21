@@ -15,7 +15,7 @@ export default function Login() {
   // eslint-disable-next-line no-unused-vars
   const { setToken, id, setId } = useContext(applicationContext);
 
-  const handleClick = () => {
+  const goToHomePage = () => {
     navigate('/');
   };
 
@@ -30,22 +30,14 @@ export default function Login() {
         user_password: password,
       })
       .then((response) => {
-        console.log(response);
-        // console.log('id', response.data.id);
-        // console.log('Token', response.data.token);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.id);
-
-        // setId(localStorage.getItem('id'));
-        // setToken(localStorage.getItem('token'));
-        handleClick();
+        goToHomePage();
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
-  console.log('State ID', id);
 
   return (
     <div className="connection">
@@ -77,7 +69,6 @@ export default function Login() {
         <p className="connection__paragraph">
           Vous n'avez pas de compte ?{' '}
           <Link to="/register">Créez-en un par ici.</Link>
-          {/* <p>Id de la personne connectée : {id}</p> */}
         </p>
       </div>
       <ConnectionRight />

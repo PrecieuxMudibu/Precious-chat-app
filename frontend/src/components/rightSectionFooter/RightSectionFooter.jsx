@@ -12,7 +12,6 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { applicationContext } from '../../App';
 
-// const socket = io('http://localhost:3200');
 const socket = io(`${process.env.REACT_APP_API_URL}`);
 
 export default function RightSectionFooter() {
@@ -123,7 +122,7 @@ export default function RightSectionFooter() {
   }
 
   function uploadImage(files) {
-    console.log('IMAGEEEEEEEEEEEEE',files[0])
+    console.log('IMAGEEEEEEEEEEEEE', files[0]);
     setFileInfo(files[0]);
     setFileChoosen(true);
     setLocalLink(URL.createObjectURL(files[0]));
@@ -136,7 +135,6 @@ export default function RightSectionFooter() {
 
   return (
     <>
-      {' '}
       {localLink !== '' ? (
         <div className="right-section__photo-preview">
           <img src={localLink} alt="" />

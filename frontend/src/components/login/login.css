@@ -9,7 +9,6 @@
   grid-template-columns: repeat(2, 1fr);
   width: 60%;
   overflow: hidden;
-
 }
 
 .connection__left {

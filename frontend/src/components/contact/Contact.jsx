@@ -4,8 +4,6 @@ import axios from 'axios';
 import React, { useContext } from 'react';
 import { applicationContext } from '../../App';
 
-// import profilePicture from '../../images/profile.jpg';
-
 export default function Contact({
   contactId,
   contactName,
@@ -20,8 +18,6 @@ export default function Contact({
     token,
   } = useContext(applicationContext);
 
-  // const routeFindOrCreateConversation =
-  //     'http://localhost:3200/api/conversation';
   const routeFindOrCreateConversation = `${process.env.REACT_APP_API_URL}/api/conversation`;
 
   function getConversation() {
@@ -45,7 +41,6 @@ export default function Contact({
       }
     });
     setContactSelected(true);
-    // .catch((error) => console.error('Erreur trouvée', error));
   }
 
   return (
@@ -60,7 +55,6 @@ export default function Contact({
         <p className="middle-section__paragraph">
           {contactText === '' ? 'Photo' : contactText}
         </p>
-        {/* {console.log('CONTACT TEXT',contactText)} */}
       </div>
     </li>
   );

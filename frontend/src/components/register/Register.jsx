@@ -20,12 +20,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emptyField, setEmptyField] = useState(true);
-  // let name;
-  // Saisissez correctement votre mot de passe
-  // let email;
-  // let password;
-  // let confirmPassword;
-  const handleClick = () => {
+  const goToHomePage = () => {
     navigate('/');
   };
 
@@ -59,10 +54,9 @@ export default function Register() {
             user_password: e.target[2].value,
           })
           .then((response) => {
-            console.log('INSCRIPTION', response);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('id', response.data.id);
-            handleClick();
+            goToHomePage();
           })
           .catch((error) => {
             console.log(error);

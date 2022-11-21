@@ -40,15 +40,10 @@ export default function Home() {
           <div className="middle-section__recent">
             <h2 className="middle-section__second-title">Recent</h2>
             <ul>
-              {/* eslint-disable-next-line */}
               {conversations.length > 0 &&
                 conversations.map((conversation) => (
-                  // <div>Contact</div>
                   <Contact
                     key={conversation.conversation_participants[0]._id}
-                    // eslint-disable-next-line
-                    // key={index}
-                    // contactId={conversation.conversation_participants[0]._id}
                     contactId={
                       conversation.conversation_participants[0]._id === id
                         ? conversation.conversation_participants[1]._id

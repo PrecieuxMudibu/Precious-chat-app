@@ -4,10 +4,9 @@ import axios from 'axios';
 import { applicationContext } from '../../App';
 import './rightSectionHeader.css';
 
-
 export default function RightSectionHeader() {
   const { contactIdentifiant, token } = useContext(applicationContext);
-  const [contactInfo,setContactInfo] = useState({});
+  const [contactInfo, setContactInfo] = useState({});
 
   useEffect(() => {
     const routeGetUser = `${process.env.REACT_APP_API_URL}/api/user/${contactIdentifiant}`;

@@ -13,10 +13,6 @@ exports.sendMessage = (request, response, next) => {
         .save()
         .then((data) => {
             let message_id = data._id;
-            // response
-            //     .status(201)
-            //     .json({ message: 'Message créé !', message_id });
-
             const filter = { _id: request.body.conversation_id };
             const update = {
                 conversation_last_message: message_id,
@@ -24,10 +20,11 @@ exports.sendMessage = (request, response, next) => {
             Conversation.findOneAndUpdate(filter, update, {
                 new: true,
             })
-            .then((user) => {
-                message: 'Mis à jour avec succès', response.status(200).json(user);
-            })
-            .catch((error) => response.status(500).json(error));
+                .then((user) => {
+                    message: 'Mis à jour avec succès',
+                        response.status(200).json(user);
+                })
+                .catch((error) => response.status(500).json(error));
         })
         .catch((error) => {
             response.status(400).json({ error });

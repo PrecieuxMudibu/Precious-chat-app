@@ -15,7 +15,6 @@ exports.register = (request, response, next) => {
             });
             user.save()
                 .then(() => {
-                    // response.status(201).json({ message: 'Utilisateur créé !' })
                     const payload = {
                         user_name: user.user_name,
                         id: user._id,

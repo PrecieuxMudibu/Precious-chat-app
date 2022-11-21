@@ -1,10 +1,8 @@
 /* eslint-disable import/no-cycle */
-
 import './message.css';
 import { useContext } from 'react';
 import moment from 'moment';
 import { applicationContext } from '../../App';
-// import profilePicture from '../../images/profile.jpg';
 
 export default function Message({ text, sender, image, date }) {
   const { id } = useContext(applicationContext);
