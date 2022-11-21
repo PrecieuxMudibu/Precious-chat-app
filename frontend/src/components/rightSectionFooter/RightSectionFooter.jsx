@@ -29,7 +29,6 @@ export default function RightSectionFooter() {
   const [fileChoosen, setFileChoosen] = useState(false);
   const [messageSended, setMessageSended] = useState(true);
   const [messageToSend, setMessageToSend] = useState(false);
-  const [test, setTest] = useState('');
   const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
   const inputFile = useRef();
@@ -88,7 +87,6 @@ export default function RightSectionFooter() {
         setFileChoosen(false);
         message.image = imageUrl;
       }
-      setTest(message.image);
       setTableSocketMessages([...tableSocketMessages, message]);
       socket.emit('send-message', message, tableSocketMessages);
       axios({
@@ -146,8 +144,6 @@ export default function RightSectionFooter() {
         </div>
       ) : null}
       <div className="right-section__footer">
-        {console.log('IMAGE', test)}
-
         <div>
           <textarea
             className="right-section__text-area"

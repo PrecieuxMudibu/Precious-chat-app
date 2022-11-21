@@ -46,6 +46,11 @@
 
 .icon-camera {
   margin-left: 1rem;
+  color:#6F6F6F;
+}
+
+.icon-emoji {
+  color: white;
 }
 
 .right-section__send {
@@ -68,6 +73,3 @@
   display: none;
 }
 
-/* .send-loader {
-  padding:auto;
-} */
