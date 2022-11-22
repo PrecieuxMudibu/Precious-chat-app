@@ -1,30 +1,50 @@
 .middle-section__third-title {
+  color:black;
   font-size: 1.8rem;
-  /* border: 1px solid red; */
   margin: 0;
+  transition: color .6s;
+
 }
 
 .middle-section__paragraph {
   font-size: 1.4rem;
   color: grey;
-  /* border: 1px solid blue; */
   margin: 0;
+  transition: color .6s;
+
 }
 
+ul {
+  padding:0;
+}
 .middle-section__contact {
+  background-color: white;
+  width: 90%;
   display: flex;
   list-style: none;
   align-items: center;
-  /* border: 1px solid red; */
-  position: relative;
-  right: 12%;
-  margin-bottom: 5%;
+  align-self: center;
   cursor: pointer;
+  padding: 5% 0 5% 0;
+  transition: background-color .8s;
+  margin: 0 auto;
 }
 
-/* .middle-section__contact:hover {
-    background-color: grey;
-} */
+.middle-section__contact:hover {
+    background-color: #5500FF;
+  width: 100%;
+  padding: 5% 0 5% 5%;
+
+
+}
+
+.middle-section__contact:hover .middle-section__third-title {
+  color:white;
+}
+
+.middle-section__contact:hover .middle-section__paragraph {
+  color:white;
+}
 
 .middle-section__contact:not(:last-child) {
   padding-bottom: 5%;

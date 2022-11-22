@@ -11,9 +11,25 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
-    // suppress errors for missing 'import React' in files
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+    'react/no-unescaped-entities': 0,
+    'no-underscore-dangle': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    // ' jsx-a11y/no-static-element-interactions': 'on',
+    'jsx-a11y/no-noninteractive-element-interactions': [
+      0,
+      {
+        handlers: [
+          'onClick',
+          'onMouseDown',
+          'onMouseUp',
+          'onKeyPress',
+          'onKeyDown',
+          'onKeyUp',
+        ],
+      },
+    ],
     // "react/jsx-no-bind": [ "error", { "ignoreDOMComponents": true } ],
     'react/jsx-no-bind': [
       1,

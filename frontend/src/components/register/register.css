@@ -1,20 +1,25 @@
-.connection {
+.register {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
   background: white;
   border-radius: 2rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 80%;
   overflow: hidden;
+  /* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit; */
+  box-shadow: 0 .8rem 1rem .1rem grey;
 }
 
-.connection__left {
+.register__left {
   padding: 2% 10%;
 }
 
-.connection__right {
+.register__right {
   background-color: #5500ff;
   position: relative;
-  /* height: 150%; */
   width: 100%;
   transform: translateX(10%) translateY(-15%) rotate(10deg);
 }
@@ -44,27 +49,41 @@
   position: relative;
   background: #687fff;
   /* background:#7D15FF; */
-  height: 100%;
-  width: 100%;
+  height: 90%;
+  /* width: 100%; */
+  width: 90%;
   transform: translateX(20%) translateY(-50%) rotate(-40deg);
   /* transform: translateX(15%) translateY(-45%) rotate(40deg); */
   border-radius: 2rem;
 }
 
-.connection__first-title {
+@media only screen and (max-width: 920px) {
+  .sky-blue  {
+    height: 60%;
+    width: 70%;
+  }
+}
+
+.register__first-title {
   font-size: 4rem;
 }
 
-.connection__paragraph {
+.register__paragraph {
   font-size: 1.6rem;
 }
 
-.connection__input-group {
+.register__error {
+  font-size: 1.6rem;
+  color:red;
+  margin-bottom: 0;
+}
+
+.register__input-group {
   display: flex;
   align-items: center;
 }
 
-.connection__input-group input {
+.register__input-group input {
   font-size: 1.6rem;
   width: 75%;
   margin: 2%;
@@ -74,24 +93,36 @@
   border-bottom: 1px solid rgb(134, 133, 133);
 }
 
-.connection__icon {
+.register__icon {
   color: rgb(134, 133, 133);
   font-size: 2.5rem;
   margin-right: 3%;
 }
 
-.connection__button {
+.register__button {
   margin: 6% 0;
   font-size: 1.6rem;
   background-color: #5500ff;
   color: white;
-  padding: 2% 5%;
-  /* border-radius: .5rem; */
+  padding: 1rem 3rem;
+  /* padding: 2% 5%; */
+  border-radius: .5rem;
   border: none;
   cursor: pointer;
+  transition: background-color 1s, color 1s,
 }
 
-.connection__button:hover {
-  /* background-color:black ; */
-  background-color: #5209e2e3;
+.register__button:hover {
+  background-color:white ;
+  color:#5500ff;
+  border: 1px solid #5500ff;
+  /* background-color: #5209e2e3; */
+}
+
+.register__link-to-login {
+  text-decoration: none;
+}
+
+.register__link-to-login:hover {
+  text-decoration: underline;
 }

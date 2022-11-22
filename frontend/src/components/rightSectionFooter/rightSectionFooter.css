@@ -1,12 +1,29 @@
 .right-section__footer {
   border-top: 1px solid grey;
-  /* border: 1px solid blue; */
   padding-top: 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+
+}
+.right-section__photo-preview {
+  width: 13rem;
+  height: 13rem;
+  position: absolute;
+  bottom: 15.3%;
+}
+.right-section__photo-preview img {
+  width: 100%;
+  height: 100%; 
 }
 
+.right-section__emoji-list {
+  position: absolute;
+  bottom: 15.3%;
+  /* border: 1px solid red; */
+
+}
 .right-section__footer > div {
   background-color: #e0e0e0;
   width: 90%;
@@ -31,6 +48,11 @@
 
 .icon-camera {
   margin-left: 1rem;
+  color:#6F6F6F;
+}
+
+.icon-emoji {
+  color: white;
 }
 
 .right-section__send {
@@ -38,12 +60,18 @@
   background-color: #4900e6;
   color: white;
   font-size: 2rem;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   width: 4rem;
   height: 4rem;
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
 }
 
+.send-icon {
+  align-self: center;
+}
 .input__image-selected {
   display: none;
 }
+

@@ -10,11 +10,26 @@ exports.register = (request, response, next) => {
                 user_name: request.body.user_name,
                 user_email: request.body.user_email,
                 user_password: hash,
+                user_profile_picture:
+                    'https://res.cloudinary.com/dzci2uq4z/image/upload/v1667309524/testFolder/avatar-removebg-preview_tkr7b0.png',
             });
             user.save()
-                .then(() =>
-                    response.status(201).json({ message: 'Utilisateur créé !' })
-                )
+                .then(() => {
+                    const payload = {
+                        user_name: user.user_name,
+                        id: user._id,
+                    };
+
+                    const token = jwt.sign(payload, 'NEVER GIVE UP', {
+                        expiresIn: '1d',
+                    });
+
+                    return response.status(200).json({
+                        message: 'Utilisateur créé !',
+                        token: 'Bearer ' + token,
+                        id: payload.id,
+                    });
+                })
                 .catch((error) => {
                     response.status(400).json({ error });
                 });
@@ -59,13 +74,25 @@ exports.login = (request, response) => {
     });
 };
 
-exports.getAllUsers = (request, response) => {
-    User.find()
-        .then((users) =>
+// exports.getAllUsers = (request, response) => {
+//     User.find()
+//         .then((users) =>
+//             response.status(200).json({
+//                 users,
+//             })
+//         )
+//         .catch((error) => {
+//             response.status(400).json({ error });
+//         });
+// };
+
+exports.getAllUsersExceptCurrentUser = (request, response) => {
+    User.find({ _id: { $nin: [request.params.id] } })
+        .then((users) => {
             response.status(200).json({
                 users,
-            })
-        )
+            });
+        })
         .catch((error) => {
             response.status(400).json({ error });
         });
@@ -73,12 +100,23 @@ exports.getAllUsers = (request, response) => {
 
 exports.getUser = (request, response) => {
     User.findOne({ _id: request.params.id })
-        .then((users) =>
-            response.status(200).json({
-                users,
-            })
-        )
+        .then((users) => response.status(200).json(users))
         .catch((error) => {
             response.status(400).json({ error });
         });
+};
+
+exports.updateUser = (request, response) => {
+    const filter = { _id: request.params.id };
+    const update = {
+        user_profile_picture: request.body.user_profile_picture,
+    };
+    User.findOneAndUpdate(filter, update, {
+        new: true,
+    })
+        .then((user) => {
+            message: 'Votre profil a été mis à jour avec succès',
+                response.status(200).json(user);
+        })
+        .catch((error) => response.status(500).json(error));
 };

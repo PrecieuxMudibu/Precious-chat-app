@@ -5,14 +5,14 @@ const userRoutes = require('./routes/userRoutes');
 const passport = require('passport');
 const conversationRoutes = require('./routes/conversationRoutes');
 const messageRoutes = require('./routes/messageRoutes');
-const dotenv = require('dotenv')
-dotenv.config()
+const dotenv = require('dotenv');
+dotenv.config();
 
 mongoose
-    .connect(
-        process.env.MONGO_DB_URL,
-        { useNewUrlParser: true, useUnifiedTopology: true }
-    )
+    .connect(process.env.MONGO_DB_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -37,17 +37,4 @@ app.use('/api', userRoutes);
 app.use('/api', conversationRoutes);
 app.use('/api', messageRoutes);
 
-// PROTEGE AVEC PASSPORT
-// app.get(
-//     '/api/protected',
-//     passport.authenticate('jwt', { session: false }),
-//     (request, response) => {
-//         response.status(200).json({
-//             user: {
-//                 id: request.user._id,
-//                 name: request.user.user_name,
-//             },
-//         });
-//     }
-// );
 module.exports = app;

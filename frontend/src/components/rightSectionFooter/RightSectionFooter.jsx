@@ -1,13 +1,18 @@
+/* eslint-disable import/no-cycle */
+
+import Picker from 'emoji-picker-react';
+// eslint-disable-next-line no-unused-vars
 import { AiOutlineSend } from 'react-icons/ai';
+// eslint-disable-next-line no-unused-vars
+import { ColorRing } from 'react-loader-spinner';
 import { BsCamera, BsEmojiLaughing } from 'react-icons/bs';
 import './rightSectionFooter.css';
 import axios from 'axios';
 import { useState, useEffect, useContext, useRef } from 'react';
 import { io } from 'socket.io-client';
-// eslint-disable-next-line import/no-cycle
 import { applicationContext } from '../../App';
 
-const socket = io('http://localhost:3200');
+const socket = io(`${process.env.REACT_APP_API_URL}`);
 
 export default function RightSectionFooter() {
   const {
@@ -16,164 +21,187 @@ export default function RightSectionFooter() {
     conversationId,
     tableSocketMessages,
     setTableSocketMessages,
+    showPicker,
+    setShowPicker,
+    token,
   } = useContext(applicationContext);
   const [messageText, setMessageText] = useState('');
-  //   const [receive, setReceive] = useState('');
+  const [fileChoosen, setFileChoosen] = useState(false);
+  const [messageSended, setMessageSended] = useState(true);
+  const [messageToSend, setMessageToSend] = useState(false);
+  const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
   const inputFile = useRef();
   const [fileInfo, setFileInfo] = useState({});
-  // const routeSendMessage = 'http://localhost:3200/api/message';
   const routeSendMessage = `${process.env.REACT_APP_API_URL}/api/message`;
-
   socket.on('connect', () => {
     console.log(`You are connected with: ${socket.id}`);
   });
 
   useEffect(() => {
-    // rejoindre la room
     socket.emit('join-room', conversationId);
-
     setTableSocketMessages([]);
   }, [conversationId]);
 
   // eslint-disable-next-line no-shadow
   socket.on('receive-message', (message, tableSocketMessages) => {
-    // console.log('MESSAGE RECU DANS LA ROOM',message.text);
-
-    // A DECOMMENTER
     setTableSocketMessages([...tableSocketMessages, message]);
   });
 
-  // eslint-disable-next-line no-unused-vars
-  async function sendMessage(e) {
-    // console.log("SEND MESSAGE",messageText)
+  async function sendMessage() {
+    if (messageText !== '' || fileChoosen !== false) {
+      setMessageToSend(true);
+    }
 
-    // const cloud_name = 'dzci2uq4z';
-    const formData = new FormData();
-    formData.append('file', fileInfo);
-    // console.log('FILE INFO', fileInfo);
-
-    formData.append('upload_preset', 'testPresetName');
-    // console.log('FORM DATA', formData);
-    let imageUrl;
-    // await axios
-    //     .post(
-    //         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-    //         formData
-    //     )
-    //     .then((response) => {
-    //         imageUrl = response.data.secure_url;
-    //         console.log('URL', response.data.secure_url);
-    //         console.log('IMAGE URL', imageUrl);
-    //         // return response.data.secure_url;
-    //     });
-
-    await axios
-      .post(routeSendMessage, {
-        message_text: messageText,
-        message_image: '',
-        // message_image: imageUrl,
-        message_date: '',
-        message_sender: id,
+    if (messageToSend) {
+      setMessageSended(false);
+      const message = {
+        text: messageText,
+        image: '',
+        sender: id,
         message_recipient: contactIdentifiant,
         conversation_id: conversationId,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        room: conversationId,
+      };
 
-    const message = await {
-      text: messageText,
-      image: imageUrl,
-      sender: id,
-      message_recipient: contactIdentifiant,
-      conversation_id: conversationId,
-      room: conversationId,
-    };
+      if (fileChoosen) {
+        let imageUrl;
+        const cloudName = 'dzci2uq4z';
+        const formData = new FormData();
+        formData.append('file', fileInfo);
+        // console.log('FILE INFO', fileInfo);
 
-    setTableSocketMessages([...tableSocketMessages, message]);
-    socket.emit('send-message', message, tableSocketMessages);
-    inputMessage.current.value = '';
-    setMessageText('');
+        formData.append('upload_preset', 'testPresetName');
+        console.log('FORM DATA', formData);
+        await axios
+          .post(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+            formData
+          )
+          .then((response) => {
+            imageUrl = response.data.secure_url;
+            console.log('URL', response.data.secure_url);
+            console.log('IMAGE URL', imageUrl);
+            // return response.data.secure_url;
+          });
+        setFileChoosen(false);
+        message.image = imageUrl;
+      }
+      setTableSocketMessages([...tableSocketMessages, message]);
+      socket.emit('send-message', message, tableSocketMessages);
+      axios({
+        method: 'post',
+        url: routeSendMessage,
+        data: {
+          message_text: messageText,
+          message_image: message.image,
+          message_sender: id,
+          message_recipient: contactIdentifiant,
+          conversation_id: conversationId,
+        },
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      inputMessage.current.value = '';
+      setMessageText('');
+      setLocalLink('');
+      setMessageSended(true);
+      setShowPicker(false);
+      setMessageToSend(false);
+    }
   }
 
   function uploadImage(files) {
-    // const cloud_name = 'dzci2uq4z';
-    // const formData = new FormData();
-    // formData.append('file', files[0]);
-    // formData.append('upload_preset', 'testPresetName');
-    // file = files[0]
     setFileInfo(files[0]);
-
-    // setImageUrl(URL.createObjectURL(files[0]));
-    // axios
-    //     .post(
-    //         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-    //         formData
-    //     )
-    //     .then((response) => {
-    //         console.log('URL', response.data.secure_url);
-    //         // setImageUrl(response.data.secure_url)
-    //         return response.data.secure_url;
-    //     });
-    // sendToCloudinary();
+    setFileChoosen(true);
+    setLocalLink(URL.createObjectURL(files[0]));
   }
 
-  // function sendToCloudinary() {
-  //     axios
-  //         .post(
-  //             'https://api.cloudinary.com/v1_1/dzci2uq4z/image/upload',
-  //             formData
-  //         )
-  //         .then((response) => {
-  //             console.log('URL', response.data.secure_url);
-  //             // setImageUrl(response.data.secure_url)
-  //         });
-  // }
+  function onEmojiClick(emojiObject) {
+    setMessageText((prevInput) => prevInput + emojiObject.emoji);
+  }
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      sendMessage();
+    }
+  };
 
   return (
-    <div className="right-section__footer">
-      {/* {console.log(tableSocketMessages)} */}
-      {/* <div><img src="" alt="" /></div> */}
-      {/* {console.log('FILE INFO',fileInfo)} */}
-      {/* {console.log('IMAGE', imageUrl)} */}
-
-      <div>
-        <textarea
-          className="right-section__text-area"
-          rows="1"
-          onChange={(e) => setMessageText(e.target.value)}
-          ref={inputMessage}
-        />
-        <span className="right-section__icons">
-          <BsEmojiLaughing className="icon-emoji" />
+    <>
+      {localLink !== '' ? (
+        <div className="right-section__photo-preview">
+          <img src={localLink} alt="" />
+        </div>
+      ) : null}
+      {showPicker ? (
+        <div className="right-section__emoji-list">
+          <Picker pickerStyle={{ width: '100%' }} onEmojiClick={onEmojiClick} />
+        </div>
+      ) : null}
+      <div className="right-section__footer">
+        <div>
           <input
-            ref={inputFile}
-            className="input__image-selected"
-            type="file"
-            name="file"
-            placeholder="Uploader une image"
-            onChange={(event) => {
-              uploadImage(event.target.files);
-            }}
+            className="right-section__text-area"
+            rows="1"
+            value={messageText}
+            onChange={(e) => setMessageText(e.target.value)}
+            ref={inputMessage}
+            onKeyDown={handleKeyPress}
           />
+          <span className="right-section__icons">
+            <BsEmojiLaughing
+              className="icon-emoji"
+              onClick={() => setShowPicker(true)}
+              onBlur={() => setShowPicker(false)}
+            />
+            <input
+              ref={inputFile}
+              className="input__image-selected"
+              type="file"
+              name="file"
+              accept=".jpg, .png, .gif"
+              placeholder="Uploader une image"
+              onChange={(event) => {
+                uploadImage(event.target.files);
+              }}
+            />
 
-          <BsCamera
-            className="icon-camera"
-            onClick={() => inputFile.current.click()}
-          />
-        </span>
+            <BsCamera
+              className="icon-camera"
+              onClick={() => inputFile.current.click()}
+            />
+          </span>
+        </div>
+
+        <button
+          type="button"
+          className="right-section__send"
+          onClick={sendMessage}
+        >
+          {messageSended ? (
+            <AiOutlineSend className="send-icon" />
+          ) : (
+            <ColorRing
+              visible
+              height="40"
+              width="40"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['white', 'white', 'white', 'white', 'white']}
+              className="send-loader"
+            />
+          )}
+        </button>
       </div>
-      <button
-        type="button"
-        className="right-section__send"
-        onClick={sendMessage}
-      >
-        <AiOutlineSend />
-      </button>
-    </div>
+    </>
   );
 }
