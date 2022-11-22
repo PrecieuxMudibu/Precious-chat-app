@@ -3,6 +3,7 @@
 import './home.css';
 import axios from 'axios';
 import { useState, useContext, useEffect } from 'react';
+// import { AiOutlineClose } from 'react-icons/ai';
 import LeftSection from '../leftSection/LeftSection';
 import RightSection from '../rightSection/RightSection';
 import SearchBar from '../searchBar/searchBar';
@@ -11,7 +12,8 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function Home() {
-  const { setId, id, token } = useContext(applicationContext);
+  const { setId, id, token } =
+    useContext(applicationContext);
   setId(localStorage.getItem('id'));
   // eslint-disable-next-line
   const [conversations, setConversations] = useState([]);
@@ -31,8 +33,18 @@ export default function Home() {
       .catch((error) => console.error(error));
   }, [id]);
 
+  // useEffect(() => {
+  //   alert('Votre compte a été créé avec succès.');
+  //   setTimeout(setTextAccountCreated(''), 10000);
+  // }, [id]);
+
   return (
     <div className="home">
+      {/* textAccountCreated !== '' ? (
+        <div className="home__account-created-text">
+          <p>{textAccountCreated}</p>
+        </div>
+      ) : null */}
       <LeftSection />
       <div className="middle-section">
         <SearchBar />

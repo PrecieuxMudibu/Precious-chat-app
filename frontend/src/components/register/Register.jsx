@@ -13,7 +13,8 @@ import { applicationContext } from '../../App';
 import ConnectionRight from '../connectionRight/ConnectionRight';
 
 export default function Register() {
-  const { setId, setToken } = useContext(applicationContext);
+  const { setId, setToken, setTextAccountCreated } =
+    useContext(applicationContext);
   const navigate = useNavigate();
   const routeRegister = `${process.env.REACT_APP_API_URL}/api/register`;
   const [name, setName] = useState('');
@@ -51,7 +52,8 @@ export default function Register() {
               localStorage.setItem('id', response.data.id);
               goToHomePage();
               setRegister(true);
-              console.log('INSCRIPTION', response.data);
+              console.log('INSCRIPTION', response.data.message);
+              setTextAccountCreated(response.data.message);
             })
             .catch((error) => {
               console.log(error);

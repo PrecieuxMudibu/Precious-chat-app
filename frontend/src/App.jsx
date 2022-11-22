@@ -20,6 +20,9 @@ function App() {
   const [tableSocketMessages, setTableSocketMessages] = useState([]);
   const [contactSelected, setContactSelected] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [textAccountCreated, setTextAccountCreated] = useState(
+    'Votre compte a été créé avec succès.'
+  );
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
@@ -42,6 +45,8 @@ function App() {
           setContactSelected,
           showPicker,
           setShowPicker,
+          textAccountCreated,
+          setTextAccountCreated,
         }}
       >
         <Routes>
