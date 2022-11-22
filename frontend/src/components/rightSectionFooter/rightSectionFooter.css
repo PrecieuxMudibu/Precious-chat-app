@@ -4,6 +4,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+
 }
 .right-section__photo-preview {
   width: 13rem;

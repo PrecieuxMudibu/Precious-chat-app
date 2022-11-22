@@ -120,16 +120,19 @@ export default function RightSectionFooter() {
   }
 
   function uploadImage(files) {
-    console.log('IMAGEEEEEEEEEEEEE', files[0]);
     setFileInfo(files[0]);
     setFileChoosen(true);
     setLocalLink(URL.createObjectURL(files[0]));
   }
 
   function onEmojiClick(emojiObject) {
-    console.log(emojiObject);
     setMessageText((prevInput) => prevInput + emojiObject.emoji);
   }
+  const handleKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      sendMessage();
+    }
+  };
 
   return (
     <>
@@ -145,12 +148,13 @@ export default function RightSectionFooter() {
       ) : null}
       <div className="right-section__footer">
         <div>
-          <textarea
+          <input
             className="right-section__text-area"
             rows="1"
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
             ref={inputMessage}
+            onKeyDown={handleKeyPress}
           />
           <span className="right-section__icons">
             <BsEmojiLaughing
