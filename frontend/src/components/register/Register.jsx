@@ -3,6 +3,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 import axios from 'axios';
 
 import './register.css';
@@ -19,6 +20,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [register, setRegister] = useState(true);
   const goToHomePage = () => {
     navigate('/');
   };
@@ -37,6 +39,7 @@ export default function Register() {
         setPassword(e.target[2].value);
         setConfirmPassword(e.target[3].value);
         if (e.target[2].value === e.target[3].value) {
+          setRegister(false);
           axios
             .post(routeRegister, {
               user_name: e.target[0].value,
@@ -47,6 +50,8 @@ export default function Register() {
               localStorage.setItem('token', response.data.token);
               localStorage.setItem('id', response.data.id);
               goToHomePage();
+              setRegister(true);
+              console.log('INSCRIPTION', response.data);
             })
             .catch((error) => {
               console.log(error);
@@ -56,7 +61,7 @@ export default function Register() {
     }
   }
 
-  return (
+  return register ? (
     <div className="register">
       <div className="register__left">
         {/* {eslint-disable-next-line react/no-unescaped-entities} */}
@@ -96,7 +101,7 @@ export default function Register() {
           ) : null}
           <input
             type="submit"
-            value="S'inscrire!"
+            value="S'inscrire"
             className="register__button"
           />
         </form>
@@ -110,5 +115,79 @@ export default function Register() {
       </div>
       <ConnectionRight />
     </div>
+  ) : (
+    <div className="home__loader">
+      <RotatingLines
+        strokeColor="grey"
+        strokeWidth="5"
+        animationDuration="1.5"
+        width="170"
+        visible
+      />
+    </div>
   );
 }
+
+// return (
+//   <div className="register">
+//     <div className="register__left">
+//       {/* {eslint-disable-next-line react/no-unescaped-entities} */}
+//       <h1 className="register__first-title">S&apos;inscrire</h1>
+//       <p className="register__paragraph">
+//         Sécurisez vos conversations avec PreciousChatt
+//       </p>
+//       <form onSubmit={createPost} className="register__form">
+//         <label htmlFor="name" className="register__input-group">
+//           <BsFillPersonFill className="register__icon" />
+//           <input id="name" type="text" placeholder="Nom" />
+//         </label>
+//         <label htmlFor="email" className="register__input-group">
+//           <MdEmail className="register__icon" />
+//           <input id="email" type="email" placeholder="Email" />
+//         </label>
+//         <label htmlFor="password" className="register__input-group">
+//           <RiLockPasswordFill className="register__icon" />
+//           <input
+//             id="password"
+//             type="password"
+//             placeholder="Votre Mot de passe"
+//           />
+//         </label>
+//         <label htmlFor="confirm_password" className="register__input-group">
+//           <RiLockPasswordFill className="register__icon" />
+//           <input
+//             id="confirm_password"
+//             type="password"
+//             placeholder="Confirmer votre Mot de passe"
+//           />
+//         </label>
+//         {password !== confirmPassword ? (
+//           <p className="register__error">
+//             Saisissez correctement votre mot de passe
+//           </p>
+//         ) : null}
+//         <input
+//           type="submit"
+//           value="S'inscrire"
+//           className="register__button"
+//         />
+//       </form>
+
+//       <p className="register__paragraph">
+//         Déjà membre ?{' '}
+//         <Link to="/login" className="register__link-to-login">
+//           Connectez-vous !
+//         </Link>
+//       </p>
+//       <RotatingLines
+//         strokeColor="grey"
+//         strokeWidth="5"
+//         animationDuration="1.5"
+//         width="96"
+//         visible
+//       />
+//     </div>
+//     <ConnectionRight />
+//   </div>
+// );
+// }
