@@ -62,7 +62,7 @@ export default function Login() {
 
           <input
             type="submit"
-            value="Se connecter!"
+            value="Se connecter"
             className="connection__button"
           />
         </form>

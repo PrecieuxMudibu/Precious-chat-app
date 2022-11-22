@@ -97,7 +97,9 @@
   border: none;
   cursor: pointer;
   color:white;
-  transition: background-color 1s, color 1s,
+  transition: background-color 1s, color 1s;
+  border: 1px solid white;
+
 }
 
 .connection__button:hover {

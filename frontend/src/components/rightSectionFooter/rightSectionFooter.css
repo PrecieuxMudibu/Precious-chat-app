@@ -49,9 +49,11 @@
 .icon-camera {
   margin-left: 1rem;
   color:#6F6F6F;
+  cursor: pointer;
 }
 
 .icon-emoji {
+  cursor: pointer;
   color: white;
 }
 
@@ -66,6 +68,7 @@
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .send-icon {
