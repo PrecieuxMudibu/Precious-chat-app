@@ -58,6 +58,7 @@ export default function Register() {
             .catch((error) => {
               console.log(error);
             });
+            break;
         }
       }
     }

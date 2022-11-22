@@ -2,7 +2,7 @@
 
 import './home.css';
 import axios from 'axios';
-import { useContext, useEffect,useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // import { AiOutlineClose } from 'react-icons/ai';
 import LeftSection from '../leftSection/LeftSection';
 import RightSection from '../rightSection/RightSection';
@@ -29,6 +29,7 @@ export default function Home() {
     })
       .then((response) => {
         setConversations(response.data);
+        console.log('CONVERSATION', response.data);
       })
       .catch((error) => console.error(error));
   }, [id]);

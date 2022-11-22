@@ -58,6 +58,7 @@ exports.getRecentConversation = (request, response) => {
     Conversation.find({
         conversation_participants: { $in: [request.params._id] },
     })
+        .sort({ updatedAt: -1 })
         .populate('conversation_participants')
         .populate('conversation_last_message')
 
