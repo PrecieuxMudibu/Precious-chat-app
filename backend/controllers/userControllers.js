@@ -123,7 +123,7 @@ exports.updateUser = (request, response) => {
 
 exports.searchUsers = (request, response) => {
     const filter = {
-        user_name: { $regex: '^' + request.body.user_name, $options: 'i' },
+        user_name: { $regex: '^' + request.params.user_name, $options: 'i' },
     };
 
     User.find(filter)
@@ -134,15 +134,3 @@ exports.searchUsers = (request, response) => {
         })
         .catch((error) => response.status(500).json(error));
 };
-
-// exports.getAllMessages = (request, response) => {
-//     Message.find({ conversation_id: request.params.id })
-//         .then((messages) =>
-//             response.status(200).json({
-//                 messages,
-//             })
-//         )
-//         .catch((error) => {
-//             response.status(400).json({ error });
-//         });
-// };

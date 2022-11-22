@@ -2,7 +2,7 @@
 
 import './home.css';
 import axios from 'axios';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect,useState } from 'react';
 // import { AiOutlineClose } from 'react-icons/ai';
 import LeftSection from '../leftSection/LeftSection';
 import RightSection from '../rightSection/RightSection';
@@ -12,11 +12,11 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function Home() {
-  const { setId, id, token } =
-    useContext(applicationContext);
+  const { setId, id, token } = useContext(applicationContext);
+  const [conversations, setConversations] = useState([]);
+
   setId(localStorage.getItem('id'));
   // eslint-disable-next-line
-  const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
     const routeGetRecentConversation = `${process.env.REACT_APP_API_URL}/api/conversation/${id}`;

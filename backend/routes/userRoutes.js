@@ -21,8 +21,8 @@ router.put(
     passport.authenticate('jwt', { session: false }),
     userControllers.updateUser
 );
-router.get(
-    '/users',
+router.post(
+    '/users/:user_name',
     passport.authenticate('jwt', { session: false }),
     userControllers.searchUsers
 );

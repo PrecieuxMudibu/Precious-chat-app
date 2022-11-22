@@ -7,6 +7,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Home from './components/home/Home';
 import ContactsList from './components/contactsList/ContactsList';
+import SearchResults from './components/searchResults/searchResults';
 
 const applicationContext = createContext();
 
@@ -20,6 +21,8 @@ function App() {
   const [tableSocketMessages, setTableSocketMessages] = useState([]);
   const [contactSelected, setContactSelected] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [textSearchInput, setTextSearchInput] = useState('');
+
   const [textAccountCreated, setTextAccountCreated] = useState(
     'Votre compte a été créé avec succès.'
   );
@@ -47,6 +50,8 @@ function App() {
           setShowPicker,
           textAccountCreated,
           setTextAccountCreated,
+          textSearchInput,
+          setTextSearchInput,
         }}
       >
         <Routes>
@@ -54,6 +59,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/contacts" element={<ContactsList />} />
+          <Route exact path="/search" element={<SearchResults />} />
         </Routes>
       </applicationContext.Provider>
     </div>
