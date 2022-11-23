@@ -12,7 +12,8 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function Home() {
-  const { setId, id, token } = useContext(applicationContext);
+  const { setId, id, token, textAccountCreated, setTextAccountCreated } =
+    useContext(applicationContext);
   const [conversations, setConversations] = useState([]);
 
   setId(localStorage.getItem('id'));
@@ -34,18 +35,21 @@ export default function Home() {
       .catch((error) => console.error(error));
   }, [id]);
 
-  // useEffect(() => {
-  //   alert('Votre compte a été créé avec succès.');
-  //   setTimeout(setTextAccountCreated(''), 10000);
-  // }, [id]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTextAccountCreated('');
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="home">
-      {/* textAccountCreated !== '' ? (
+      {textAccountCreated !== '' ? (
         <div className="home__account-created-text">
           <p>{textAccountCreated}</p>
         </div>
-      ) : null */}
+      ) : null}
+
       <LeftSection />
       <div className="middle-section">
         <SearchBar />

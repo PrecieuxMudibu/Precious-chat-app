@@ -8,13 +8,14 @@
 .home__account-created-text {
   /* border: 2px solid green; */
   text-align: center;
-  background-color: green;
+  background-color: #3e83ce;
+  /* background-color: #23C552; */
   border-radius: 1rem;
   color: white;
-  padding: 1rem 2rem 0 2rem;
+  padding: 0 2rem;
   position:absolute;
   z-index: 1;
-  bottom:3%;
+  bottom:4.5%;
   font-size: 1.6rem;
   left:50%;
   transform: translateX(-50%);

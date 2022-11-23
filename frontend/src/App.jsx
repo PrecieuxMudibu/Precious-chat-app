@@ -22,10 +22,7 @@ function App() {
   const [contactSelected, setContactSelected] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [textSearchInput, setTextSearchInput] = useState('');
-
-  const [textAccountCreated, setTextAccountCreated] = useState(
-    'Votre compte a été créé avec succès.'
-  );
+  const [textAccountCreated, setTextAccountCreated] = useState('');
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
