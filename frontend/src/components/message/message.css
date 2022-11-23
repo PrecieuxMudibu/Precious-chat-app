@@ -1,14 +1,35 @@
 .message {
   margin: 2rem 0;
   display: inline-block;
-  /* max-width: 65%; */
+  max-width: 60%;
 }
 
 .message__photo {
-  /* display: block; */
   width: 96%;
   margin: 2%;
-  /* height: 50%; */
+  transition: opacity .5s;
+}
+
+.icon-save {
+  cursor: pointer;
+  opacity: 0;
+  color: #4900e6;
+  transition: opacity .5s;
+  font-size: 5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.message__photo:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.message__photo:hover + .icon-save, .icon-save:hover {
+  opacity:1;
+  cursor: pointer;
 }
 
 .message--send {

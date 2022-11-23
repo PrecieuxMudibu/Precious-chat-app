@@ -130,7 +130,9 @@ export default function RightSectionFooter() {
     <>
       {localLink !== '' ? (
         <div className="right-section__photo-preview">
+          <div />
           <img src={localLink} alt="" />
+          {/* <p onClick={sendMessage}>Envoyer</p> */}
         </div>
       ) : null}
       {showPicker ? (

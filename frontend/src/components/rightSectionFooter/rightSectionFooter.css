@@ -4,19 +4,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-
 }
+
 .right-section__photo-preview {
-  width: 13rem;
-  height: 13rem;
+  width: 20rem;
+  height: 20rem;
   position: absolute;
   bottom: 15.3%;
+  border: .8rem solid #8000FF;
+  border-radius: .5rem;
+}
+
+.right-section__photo-preview div {
+  /* background-color: rgba(0, 0, 0, 0); */
+  position: absolute;
+  width: 100%;
+  height: 100%; 
 }
 .right-section__photo-preview img {
   width: 100%;
   height: 100%; 
 }
+
+/* .right-section__photo-preview p {
+  position: absolute;
+  border-radius: .5rem;
+
+  font-size: 1.6rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid green;
+  padding: 1rem;
+  
+} */
 
 .right-section__emoji-list {
   position: absolute;
