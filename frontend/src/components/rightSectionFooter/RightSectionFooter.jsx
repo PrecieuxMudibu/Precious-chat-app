@@ -150,7 +150,7 @@ export default function RightSectionFooter() {
             ref={inputMessage}
             onKeyDown={handleKeyPress}
           />
-          <span className="right-section__icons">
+          <div className="right-section__icons">
             <BsEmojiLaughing
               className="icon-emoji"
               onClick={() => setShowPicker(true)}
@@ -172,7 +172,7 @@ export default function RightSectionFooter() {
               className="icon-camera"
               onClick={() => inputFile.current.click()}
             />
-          </span>
+          </div>
         </div>
 
         <button

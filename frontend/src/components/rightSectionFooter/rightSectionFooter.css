@@ -51,9 +51,10 @@
   display: flex;
   align-items: center;
   border-radius: 0.5rem;
+  /* border: 1px solid blue; */
+  margin-right: 1rem;
 }
 .right-section__text-area {
-  /* border: 1px solid blue; */
   width: 80%;
   border: none;
   background-color: transparent;
@@ -62,20 +63,23 @@
 }
 
 .right-section__icons {
+  display: flex;
   margin-left: 2%;
   font-size: 2.5rem;
-  /* border: 1px solid red; */
 }
 
 .icon-camera {
-  margin-left: 1rem;
+  margin: 0 1rem;
   color:#6F6F6F;
+  display: block;
   cursor: pointer;
 }
 
 .icon-emoji {
   cursor: pointer;
   color: white;
+  display: block;
+
 }
 
 .right-section__send {
