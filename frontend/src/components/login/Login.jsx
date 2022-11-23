@@ -32,6 +32,7 @@ export default function Login() {
       .then((response) => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.id);
+        console.log('USER NAME', response.data.user_name)
         goToHomePage();
       })
       .catch((error) => {

@@ -11,7 +11,6 @@
   color: grey;
   margin: 0;
   transition: color .6s;
-
 }
 
 ul {
@@ -34,8 +33,6 @@ ul {
     background-color: #5500FF;
   width: 100%;
   padding: 5% 0 5% 5%;
-
-
 }
 
 .middle-section__contact:hover .middle-section__third-title {

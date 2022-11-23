@@ -35,7 +35,12 @@ export default function Message({ text, sender, image, date }) {
       <div className={`${style}`}>
         {image !== '' ? (
           <>
-            <img src={image} onClick={() => saveFile(image)} className="message__photo" alt="" />
+            <img
+              src={image}
+              onClick={() => saveFile(image)}
+              className="message__photo"
+              alt=""
+            />
 
             <FiDownload onClick={() => saveFile(image)} className="icon-save" />
           </>

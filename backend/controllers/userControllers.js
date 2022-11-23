@@ -68,6 +68,7 @@ exports.login = (request, response) => {
             message: 'Vous êtes connecté !',
             token: 'Bearer ' + token,
             id: payload.id,
+            user_name: user.user_name,
         });
         // var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
         // var token = jwt.sign(payload, secretOrPrivateKey, [options, callback]);

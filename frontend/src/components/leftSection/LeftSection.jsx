@@ -13,6 +13,7 @@ import './leftSection.css';
 export default function LeftSection() {
   const navigate = useNavigate();
   const pictureFile = useRef();
+  const [currentUserName, setCurrentUserName] = useState('');
 
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
@@ -34,6 +35,8 @@ export default function LeftSection() {
     })
       .then((response) => {
         setProfilePicture(response.data.user_profile_picture);
+        console.log('USER INFO', response.data.user_name);
+        setCurrentUserName(response.data.user_name);
       })
       .catch((error) => console.error(error));
   }, [id]);
@@ -119,7 +122,7 @@ export default function LeftSection() {
           />
         </div>
       )}
-
+      <p className='left-section__current-user-name'>{currentUserName}</p>
       <input
         ref={pictureFile}
         type="file"
