@@ -39,7 +39,7 @@ export default function ContactsList() {
       <div className="middle-section">
         <SearchBar />
         <div>
-          <div className="middle-section__recent">
+          <div className="middle-section__contacts-list">
             <h2 className="middle-section__second-title">Contacts</h2>
             <ul>
               {users.map((user) => (
