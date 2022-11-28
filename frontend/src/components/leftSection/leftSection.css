@@ -51,6 +51,7 @@ li {
    /* width: 80%; */
   /* align-self: flex-end; */
 }
+
 .left-section__link {
   height: 7rem;
   color: white;
@@ -102,23 +103,36 @@ li {
     display: none;
   }
   .left-section__profile-picture {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    margin: 0 0 0 0;
-    align-self: flex-start;
+    margin: 0 auto;
   }
   .left-section__navigation ul {
-    border: 1px solid yellow;
     margin-top: 0rem;
     display: grid;
     grid-template-columns: repeat(2, 50%)
   }
 
+  .left-section__link {
+    height: 7rem;
+    color: white;
+    font-size: 4.5rem;
+    background: none;
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex;
+    padding-left: 0;
+  }
+
+  li {
+  margin-left:0;
+
+  }
+
   .left-section__logout {
     font-size: 4.5rem;
-    margin-top: 0;
     display: block;
-    border: 1px solid red;
+    margin: auto;
   }
 }
