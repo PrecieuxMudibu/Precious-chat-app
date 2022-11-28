@@ -23,6 +23,8 @@ function App() {
   const [showPicker, setShowPicker] = useState(false);
   const [textSearchInput, setTextSearchInput] = useState('');
   const [textAccountCreated, setTextAccountCreated] = useState('');
+  const [rightSectionVisibility, setRightSectionVisibility] = useState(false);
+  const [middleSectionVisibility, setMiddleSectionVisibility] = useState(false);
 
   return (
     // eslint-disable-next-line react/react-in-jsx-scope
@@ -49,6 +51,10 @@ function App() {
           setTextAccountCreated,
           textSearchInput,
           setTextSearchInput,
+          rightSectionVisibility,
+          setRightSectionVisibility,
+          middleSectionVisibility,
+          setMiddleSectionVisibility,
         }}
       >
         <Routes>

@@ -13,7 +13,8 @@ export default function Login() {
 
   const navigate = useNavigate();
   // eslint-disable-next-line no-unused-vars
-  const { setToken, id, setId } = useContext(applicationContext);
+  const { setMiddleSectionVisibility, setRightSectionVisibility } =
+    useContext(applicationContext);
 
   const goToHomePage = () => {
     navigate('/');
@@ -32,7 +33,9 @@ export default function Login() {
       .then((response) => {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.id);
-        console.log('USER NAME', response.data.user_name)
+        console.log('USER NAME', response.data.user_name);
+        setMiddleSectionVisibility(true);
+        setRightSectionVisibility(false);
         goToHomePage();
       })
       .catch((error) => {

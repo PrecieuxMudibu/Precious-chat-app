@@ -152,6 +152,7 @@ export default function LeftSection() {
 
       <nav className="left-section__navigation">
         <ul>
+            {console.log(`Votre résolution d'écran est: " + ${window.screen.width} + "x" ${window.screen.height}`)}
           <li>
             <Link
               to="/"

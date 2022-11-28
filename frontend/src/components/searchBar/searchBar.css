@@ -20,3 +20,9 @@
   width: 75%;
   outline: none;
 }
+
+@media screen and (max-width: 530px) {
+  .middle-section__search-bar {
+    margin-top: 2rem;
+  }
+}

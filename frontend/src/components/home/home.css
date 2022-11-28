@@ -1,7 +1,7 @@
 .home {
   display: flex;
   padding: 2% 2.5%;
-  /* height: 89vh; */
+  height: 90vh;
 }
 
 .home__account-created-text {
@@ -44,4 +44,17 @@
 .middle-section__second-title {
   padding-left: 5%;
   font-size: 2rem;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (max-width: 530px) {
+  .home {
+    flex-direction: column;
+  }
+  .middle-section {
+    width: 100%;
+  }
 }

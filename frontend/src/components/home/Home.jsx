@@ -12,9 +12,17 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function Home() {
-  const { setId, id, token, textAccountCreated, setTextAccountCreated } =
-    useContext(applicationContext);
+  const {
+    setId,
+    id,
+    token,
+    textAccountCreated,
+    setTextAccountCreated,
+    middleSectionVisibility,
+  } = useContext(applicationContext);
   const [conversations, setConversations] = useState([]);
+  const [middleSectionClassName, setMiddleSectionClassName] =
+    useState('middle-section');
 
   setId(localStorage.getItem('id'));
   // eslint-disable-next-line
@@ -36,6 +44,15 @@ export default function Home() {
   }, [id]);
 
   useEffect(() => {
+    if (window.screen.width < 530 && middleSectionVisibility === false) {
+      setMiddleSectionClassName('middle-section hide');
+      console.log('HEllkkkkkkko', Date.now());
+    } else {
+      setMiddleSectionClassName('middle-section');
+    }
+  });
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setTextAccountCreated('');
     }, 6000);
@@ -51,7 +68,7 @@ export default function Home() {
       ) : null}
 
       <LeftSection />
-      <div className="middle-section">
+      <div className={middleSectionClassName}>
         <SearchBar />
         <div>
           <div className="middle-section__recent">

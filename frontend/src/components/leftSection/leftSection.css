@@ -91,3 +91,34 @@ li {
   margin-top: 20%;
   align-self: center;
 }
+
+@media screen and (max-width: 530px) {
+  .left-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  .left-section__current-user-name {
+    display: none;
+  }
+  .left-section__profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 0 0 0;
+    align-self: flex-start;
+  }
+  .left-section__navigation ul {
+    border: 1px solid yellow;
+    margin-top: 0rem;
+    display: grid;
+    grid-template-columns: repeat(2, 50%)
+  }
+
+  .left-section__logout {
+    font-size: 4.5rem;
+    margin-top: 0;
+    display: block;
+    border: 1px solid red;
+  }
+}

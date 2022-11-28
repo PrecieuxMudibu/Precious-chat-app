@@ -29,3 +29,28 @@
   
   /* position: relative; */
 }
+
+.hide {
+  display: none;
+  border: 5px solid red;
+}
+
+.show {
+  display: block;
+}
+
+@media screen and (max-width: 530px) {
+  .right-section {
+    /* margin-top: 2rem; */
+    width: 88%;
+    padding: 2% 6%;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+}

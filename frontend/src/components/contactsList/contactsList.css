@@ -24,3 +24,12 @@
   padding-left: 5%;
   font-size: 2rem;
 }
+
+@media screen and (max-width: 530px) {
+  .home {
+    flex-direction: column;
+  }
+  .middle-section {
+    width: 100%;
+  }
+}
