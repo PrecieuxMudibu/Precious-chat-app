@@ -1,30 +1,3 @@
-.home {
-    display: flex;
-    padding: 2.5%;
-    height: 89vh;
-    /* justify-content: space-between; */
-  }
-  
-  .home__account-created-text {
-    /* border: 2px solid green; */
-    text-align: center;
-    background-color: green;
-    border-radius: 1rem;
-    color: white;
-    padding: 1rem 2rem 0 2rem;
-    position:absolute;
-    z-index: 1;
-    bottom:3%;
-    font-size: 1.6rem;
-    left:50%;
-    transform: translateX(-50%);
-  }
-  
-  .icon-close {
-    font-size: 2rem;
-    cursor: pointer;
-  }
-  
   .middle-section {
     width: 30%;
     margin-right: 4%;

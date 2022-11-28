@@ -1,15 +1,12 @@
 .home {
   display: flex;
-  padding: 2.5%;
-  height: 89vh;
-  /* justify-content: space-between; */
+  padding: 2% 2.5%;
+  /* height: 89vh; */
 }
 
 .home__account-created-text {
-  /* border: 2px solid green; */
   text-align: center;
   background-color: #3e83ce;
-  /* background-color: #23C552; */
   border-radius: 1rem;
   color: white;
   padding: 0 2rem;
