@@ -57,4 +57,11 @@
   .middle-section {
     width: 100%;
   }
+
+  .middle-section ul {
+    /* border: 1px solid red; */
+    height: 65vh;
+  overflow-y: scroll;
+
+  }
 }

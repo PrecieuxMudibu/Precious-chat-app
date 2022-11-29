@@ -93,6 +93,9 @@ li {
   align-self: center;
 }
 
+.hide {
+  display: none;
+}
 @media screen and (max-width: 530px) {
   .left-section {
     width: 100%;

@@ -46,6 +46,10 @@
     padding: 2% 6%;
   }
 
+  .right-section__messages {   
+    height: 79vh;
+  }
+
   .hide {
     display: none;
   }

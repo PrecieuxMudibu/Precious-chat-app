@@ -140,3 +140,22 @@
 .register__link-to-login:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 530px) {
+  .register {
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(0,0);
+    background: white;
+    border-radius: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .register__right {
+    display: none;
+  }
+}
