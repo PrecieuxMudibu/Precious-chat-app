@@ -13,13 +13,20 @@ import './leftSection.css';
 export default function LeftSection() {
   const navigate = useNavigate();
   const pictureFile = useRef();
+  const [currentUserName, setCurrentUserName] = useState('');
 
   const [fileChoosen, setFileChoosen] = useState(false);
   const [fileInfo, setFileInfo] = useState({});
   const [profilePicture, setProfilePicture] = useState('');
   const [profilePictureUpdated, setProfilePictureUpdated] = useState(true);
-  const { id, setContactSelected, setId, setToken, token } =
-    useContext(applicationContext);
+  const {
+    id,
+    setContactSelected,
+    setId,
+    setToken,
+    middleSectionVisibility,
+    token,
+  } = useContext(applicationContext);
 
   const routeGetCurrentUserInfo = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
   useEffect(() => {
@@ -34,6 +41,8 @@ export default function LeftSection() {
     })
       .then((response) => {
         setProfilePicture(response.data.user_profile_picture);
+        console.log('USER INFO', response.data.user_name);
+        setCurrentUserName(response.data.user_name);
       })
       .catch((error) => console.error(error));
   }, [id]);
@@ -98,7 +107,9 @@ export default function LeftSection() {
   }
 
   return (
-    <div className="left-section">
+    <div
+      className={window.screen.width<530 && middleSectionVisibility===false ? 'left-section hide' : 'left-section'}
+    >
       {profilePictureUpdated === true ? (
         <img
           src={profilePicture}
@@ -119,7 +130,7 @@ export default function LeftSection() {
           />
         </div>
       )}
-
+      <p className="left-section__current-user-name">{currentUserName}</p>
       <input
         ref={pictureFile}
         type="file"
@@ -149,6 +160,9 @@ export default function LeftSection() {
 
       <nav className="left-section__navigation">
         <ul>
+          {console.log(
+            `Votre résolution d'écran est: " + ${window.screen.width} + "x" ${window.screen.height}`
+          )}
           <li>
             <Link
               to="/"

@@ -1,11 +1,17 @@
 /* eslint-disable import/no-cycle */
 import React, { useContext, useEffect, useState } from 'react';
+import { BiArrowBack } from 'react-icons/bi';
 import axios from 'axios';
 import { applicationContext } from '../../App';
 import './rightSectionHeader.css';
 
 export default function RightSectionHeader() {
-  const { contactIdentifiant, token } = useContext(applicationContext);
+  const {
+    contactIdentifiant,
+    setRightSectionVisibility,
+    setMiddleSectionVisibility,
+    token,
+  } = useContext(applicationContext);
   const [contactInfo, setContactInfo] = useState({});
 
   useEffect(() => {
@@ -23,8 +29,15 @@ export default function RightSectionHeader() {
       })
       .catch((error) => console.error(error));
   }, [contactIdentifiant]);
+
+  function goBack() {
+    setRightSectionVisibility(false);
+    setMiddleSectionVisibility(true);
+  }
+
   return (
     <div className="right-section__header">
+      <BiArrowBack className="right-section__arrow-back" onClick={goBack} />
       <img
         src={contactInfo.user_profile_picture}
         alt="profil du contact"

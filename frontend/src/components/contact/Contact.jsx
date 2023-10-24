@@ -15,6 +15,8 @@ export default function Contact({
     setConversationId,
     setContactIdentifiant,
     setContactSelected,
+    setRightSectionVisibility,
+    setMiddleSectionVisibility,
     token,
   } = useContext(applicationContext);
 
@@ -41,6 +43,8 @@ export default function Contact({
       }
     });
     setContactSelected(true);
+    setRightSectionVisibility(true);
+    setMiddleSectionVisibility(false);
   }
 
   return (

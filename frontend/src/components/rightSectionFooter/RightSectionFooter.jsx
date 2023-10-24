@@ -28,7 +28,7 @@ export default function RightSectionFooter() {
   const [messageText, setMessageText] = useState('');
   const [fileChoosen, setFileChoosen] = useState(false);
   const [messageSended, setMessageSended] = useState(true);
-  const [messageToSend, setMessageToSend] = useState(false);
+  // const [messageToSend, setMessageToSend] = useState(false);
   const [localLink, setLocalLink] = useState('');
   const inputMessage = useRef();
   const inputFile = useRef();
@@ -50,10 +50,6 @@ export default function RightSectionFooter() {
 
   async function sendMessage() {
     if (messageText !== '' || fileChoosen !== false) {
-      setMessageToSend(true);
-    }
-
-    if (messageToSend) {
       setMessageSended(false);
       const message = {
         text: messageText,
@@ -80,9 +76,6 @@ export default function RightSectionFooter() {
           )
           .then((response) => {
             imageUrl = response.data.secure_url;
-            console.log('URL', response.data.secure_url);
-            console.log('IMAGE URL', imageUrl);
-            // return response.data.secure_url;
           });
         setFileChoosen(false);
         message.image = imageUrl;
@@ -115,7 +108,6 @@ export default function RightSectionFooter() {
       setLocalLink('');
       setMessageSended(true);
       setShowPicker(false);
-      setMessageToSend(false);
     }
   }
 
@@ -138,7 +130,9 @@ export default function RightSectionFooter() {
     <>
       {localLink !== '' ? (
         <div className="right-section__photo-preview">
+          <div />
           <img src={localLink} alt="" />
+          {/* <p onClick={sendMessage}>Envoyer</p> */}
         </div>
       ) : null}
       {showPicker ? (
@@ -156,7 +150,7 @@ export default function RightSectionFooter() {
             ref={inputMessage}
             onKeyDown={handleKeyPress}
           />
-          <span className="right-section__icons">
+          <div className="right-section__icons">
             <BsEmojiLaughing
               className="icon-emoji"
               onClick={() => setShowPicker(true)}
@@ -178,7 +172,7 @@ export default function RightSectionFooter() {
               className="icon-camera"
               onClick={() => inputFile.current.click()}
             />
-          </span>
+          </div>
         </div>
 
         <button

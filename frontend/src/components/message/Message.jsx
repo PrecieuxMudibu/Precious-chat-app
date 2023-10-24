@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable import/no-cycle */
 import './message.css';
 import { useContext } from 'react';
 import moment from 'moment';
+import { saveAs } from 'file-saver';
+import { FiDownload } from 'react-icons/fi';
 import { applicationContext } from '../../App';
 
 export default function Message({ text, sender, image, date }) {
@@ -23,11 +26,24 @@ export default function Message({ text, sender, image, date }) {
     time = 'message__time';
   }
 
+  function saveFile(e) {
+    saveAs(e);
+  }
+
   return (
     <div className={leftOrRight}>
       <div className={`${style}`}>
         {image !== '' ? (
-          <img src={image} className="message__photo" alt="" />
+          <>
+            <img
+              src={image}
+              onClick={() => saveFile(image)}
+              className="message__photo"
+              alt=""
+            />
+
+            <FiDownload onClick={() => saveFile(image)} className="icon-save" />
+          </>
         ) : null}
 
         {text === '' ? null : (

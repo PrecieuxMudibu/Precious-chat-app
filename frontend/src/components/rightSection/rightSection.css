@@ -10,7 +10,12 @@
   margin-top: 3rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  
+}
+
+.right-section figure img {
+  display: block;
+
 }
 
 .right-section__messages {
@@ -23,4 +28,33 @@
   flex-direction: column;
   
   /* position: relative; */
+}
+
+.hide {
+  display: none;
+  border: 5px solid red;
+}
+
+.show {
+  display: block;
+}
+
+@media screen and (max-width: 530px) {
+  .right-section {
+    /* margin-top: 2rem; */
+    width: 88%;
+    padding: 2% 6%;
+  }
+
+  .right-section__messages {   
+    height: 79vh;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
 }

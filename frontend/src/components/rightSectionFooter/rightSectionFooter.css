@@ -4,19 +4,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-
 }
+
 .right-section__photo-preview {
-  width: 13rem;
-  height: 13rem;
+  width: 20rem;
+  height: 20rem;
   position: absolute;
   bottom: 15.3%;
+  border: .8rem solid #8000FF;
+  border-radius: .5rem;
+}
+
+.right-section__photo-preview div {
+  /* background-color: rgba(0, 0, 0, 0); */
+  position: absolute;
+  width: 100%;
+  height: 100%; 
 }
 .right-section__photo-preview img {
   width: 100%;
   height: 100%; 
 }
+
+/* .right-section__photo-preview p {
+  position: absolute;
+  border-radius: .5rem;
+
+  font-size: 1.6rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid green;
+  padding: 1rem;
+  
+} */
 
 .right-section__emoji-list {
   position: absolute;
@@ -30,9 +51,10 @@
   display: flex;
   align-items: center;
   border-radius: 0.5rem;
+  /* border: 1px solid blue; */
+  margin-right: 1rem;
 }
 .right-section__text-area {
-  /* border: 1px solid blue; */
   width: 80%;
   border: none;
   background-color: transparent;
@@ -41,18 +63,23 @@
 }
 
 .right-section__icons {
+  display: flex;
   margin-left: 2%;
   font-size: 2.5rem;
-  /* border: 1px solid red; */
 }
 
 .icon-camera {
-  margin-left: 1rem;
+  margin: 0 1rem;
   color:#6F6F6F;
+  display: block;
+  cursor: pointer;
 }
 
 .icon-emoji {
+  cursor: pointer;
   color: white;
+  display: block;
+
 }
 
 .right-section__send {
@@ -66,6 +93,7 @@
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .send-icon {

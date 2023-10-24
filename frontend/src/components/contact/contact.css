@@ -3,7 +3,6 @@
   font-size: 1.8rem;
   margin: 0;
   transition: color .6s;
-
 }
 
 .middle-section__paragraph {
@@ -11,12 +10,12 @@
   color: grey;
   margin: 0;
   transition: color .6s;
-
 }
 
 ul {
   padding:0;
 }
+
 .middle-section__contact {
   background-color: white;
   width: 90%;
@@ -25,17 +24,14 @@ ul {
   align-items: center;
   align-self: center;
   cursor: pointer;
-  padding: 5% 0 5% 0;
+  padding: 5% 0 5% 5%;
   transition: background-color .8s;
   margin: 0 auto;
 }
 
 .middle-section__contact:hover {
-    background-color: #5500FF;
-  width: 100%;
-  padding: 5% 0 5% 5%;
-
-
+  background-color: #5500FF;
+  width: 90%;
 }
 
 .middle-section__contact:hover .middle-section__third-title {
@@ -47,7 +43,7 @@ ul {
 }
 
 .middle-section__contact:not(:last-child) {
-  padding-bottom: 5%;
+  /* padding-bottom: 5%; */
   border-bottom: 1px solid grey;
 }
 

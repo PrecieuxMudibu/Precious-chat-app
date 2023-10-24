@@ -11,6 +11,20 @@
   overflow: hidden;
   /* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit; */
   box-shadow: 0 .8rem 1rem .1rem grey;
+  /* background-color: green; */
+}
+
+.home__loader {
+  position: absolute;
+  z-index: 3;
+  /* border: 1px solid red; */
+  width: 17rem;
+  height: 17rem;
+  top: 50%;
+  margin-top: -9rem;
+  margin-left: -9rem;
+  left: 50%;
+  opacity: 1;
 }
 
 .register__left {
@@ -109,14 +123,14 @@
   border-radius: .5rem;
   border: none;
   cursor: pointer;
-  transition: background-color 1s, color 1s,
+  transition: background-color 1s, color 1s;
+  border: 1px solid white;
 }
 
 .register__button:hover {
   background-color:white ;
   color:#5500ff;
   border: 1px solid #5500ff;
-  /* background-color: #5209e2e3; */
 }
 
 .register__link-to-login {
@@ -125,4 +139,23 @@
 
 .register__link-to-login:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 530px) {
+  .register {
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(0,0);
+    background: white;
+    border-radius: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .register__right {
+    display: none;
+  }
 }

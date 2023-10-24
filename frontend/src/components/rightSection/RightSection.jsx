@@ -17,9 +17,13 @@ export default function RightSection() {
     contactSelected,
     showPicker,
     setShowPicker,
+    rightSectionVisibility,
+    setRightSectionVisibility,
     token,
   } = useContext(applicationContext);
   const [messages, setMessages] = useState();
+  const [rightSectionClassName, setRightSectionClassName] =
+    useState('right-section');
 
   useEffect(() => {
     const routeGetAllMessages = `${process.env.REACT_APP_API_URL}/api/message/${conversationId}`;
@@ -37,8 +41,17 @@ export default function RightSection() {
       .catch((error) => console.error(error));
   }, [conversationId]);
 
+  useEffect(() => {
+    if (window.screen.width < 530 && rightSectionVisibility === false) {
+      setRightSectionClassName('right-section hide');
+      console.log('HEllkkkkkkko', Date.now());
+    } else {
+      setRightSectionClassName('right-section');
+    }
+  });
+
   return contactSelected ? (
-    <div className="right-section">
+    <div className={rightSectionClassName}>
       <RightSectionHeader />
       <div
         className="right-section__messages"
@@ -70,7 +83,7 @@ export default function RightSection() {
       <RightSectionFooter />
     </div>
   ) : (
-    <div className="right-section">
+    <div className={rightSectionClassName}>
       <figure>
         <img src={background} alt="" />
       </figure>

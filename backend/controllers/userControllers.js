@@ -25,7 +25,7 @@ exports.register = (request, response, next) => {
                     });
 
                     return response.status(200).json({
-                        message: 'Utilisateur créé !',
+                        message: 'Votre compte a été créé avec succès.',
                         token: 'Bearer ' + token,
                         id: payload.id,
                     });
@@ -68,6 +68,7 @@ exports.login = (request, response) => {
             message: 'Vous êtes connecté !',
             token: 'Bearer ' + token,
             id: payload.id,
+            user_name: user.user_name,
         });
         // var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
         // var token = jwt.sign(payload, secretOrPrivateKey, [options, callback]);
@@ -117,6 +118,20 @@ exports.updateUser = (request, response) => {
         .then((user) => {
             message: 'Votre profil a été mis à jour avec succès',
                 response.status(200).json(user);
+        })
+        .catch((error) => response.status(500).json(error));
+};
+
+exports.searchUsers = (request, response) => {
+    const filter = {
+        user_name: { $regex: '^' + request.params.user_name, $options: 'i' },
+    };
+
+    User.find(filter)
+        .then((users) => {
+            response
+                .status(200)
+                .json({ message: 'Les utilisateurs ont été trouvés', users });
         })
         .catch((error) => response.status(500).json(error));
 };

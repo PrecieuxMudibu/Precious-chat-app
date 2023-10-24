@@ -2,7 +2,8 @@
 
 import './home.css';
 import axios from 'axios';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
+// import { AiOutlineClose } from 'react-icons/ai';
 import LeftSection from '../leftSection/LeftSection';
 import RightSection from '../rightSection/RightSection';
 import SearchBar from '../searchBar/searchBar';
@@ -11,10 +12,20 @@ import Contact from '../contact/Contact';
 import { applicationContext } from '../../App';
 
 export default function Home() {
-  const { setId, id, token } = useContext(applicationContext);
+  const {
+    setId,
+    id,
+    token,
+    textAccountCreated,
+    setTextAccountCreated,
+    middleSectionVisibility,
+  } = useContext(applicationContext);
+  const [conversations, setConversations] = useState([]);
+  const [middleSectionClassName, setMiddleSectionClassName] =
+    useState('middle-section');
+
   setId(localStorage.getItem('id'));
   // eslint-disable-next-line
-  const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
     const routeGetRecentConversation = `${process.env.REACT_APP_API_URL}/api/conversation/${id}`;
@@ -27,14 +38,37 @@ export default function Home() {
     })
       .then((response) => {
         setConversations(response.data);
+        console.log('CONVERSATION', response.data);
       })
       .catch((error) => console.error(error));
   }, [id]);
 
+  useEffect(() => {
+    if (window.screen.width < 530 && middleSectionVisibility === false) {
+      setMiddleSectionClassName('middle-section hide');
+      console.log('HEllkkkkkkko', Date.now());
+    } else {
+      setMiddleSectionClassName('middle-section');
+    }
+  });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTextAccountCreated('');
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="home">
+      {textAccountCreated !== '' ? (
+        <div className="home__account-created-text">
+          <p>{textAccountCreated}</p>
+        </div>
+      ) : null}
+
       <LeftSection />
-      <div className="middle-section">
+      <div className={middleSectionClassName}>
         <SearchBar />
         <div>
           <div className="middle-section__recent">
@@ -74,5 +108,6 @@ export default function Home() {
       </div>
       <RightSection />
     </div>
+    
   );
 }
