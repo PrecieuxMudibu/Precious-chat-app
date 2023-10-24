@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable import/no-cycle */
 import { MdEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
@@ -11,16 +9,14 @@ import ConnectionRight from '../connectionRight/ConnectionRight';
 import { applicationContext } from '../../App';
 
 export default function Login() {
-  // if (process.env.NODE_ENV === "production") {
-  //     redirectUri = import.meta.env["VITE_REDIRECT_URI_PROD"]
-  // }
-  // const routeLogin = 'http://localhost:3200/api/login';
   const routeLogin = `${process.env.REACT_APP_API_URL}/api/login`;
 
   const navigate = useNavigate();
-  const { setToken, id, setId } = useContext(applicationContext);
+  // eslint-disable-next-line no-unused-vars
+  const { setMiddleSectionVisibility, setRightSectionVisibility } =
+    useContext(applicationContext);
 
-  const handleClick = () => {
+  const goToHomePage = () => {
     navigate('/');
   };
 
@@ -35,22 +31,17 @@ export default function Login() {
         user_password: password,
       })
       .then((response) => {
-        console.log(response);
-        // console.log('id', response.data.id);
-        // console.log('Token', response.data.token);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('id', response.data.id);
-
-        setId(localStorage.getItem('id'));
-        setToken(localStorage.getItem('token'));
-        handleClick();
+        console.log('USER NAME', response.data.user_name);
+        setMiddleSectionVisibility(true);
+        setRightSectionVisibility(false);
+        goToHomePage();
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
-  console.log('State ID', id);
 
   return (
     <div className="connection">
@@ -75,14 +66,13 @@ export default function Login() {
 
           <input
             type="submit"
-            value="Se connecter!"
+            value="Se connecter"
             className="connection__button"
           />
         </form>
         <p className="connection__paragraph">
-          Vous n'avez pas de compte ?
+          Vous n'avez pas de compte ?{' '}
           <Link to="/register">Créez-en un par ici.</Link>
-          {/* <p>Id de la personne connectée : {id}</p> */}
         </p>
       </div>
       <ConnectionRight />

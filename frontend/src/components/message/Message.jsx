@@ -1,11 +1,11 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable import/no-cycle */
 import './message.css';
 import { useContext } from 'react';
 import moment from 'moment';
+import { saveAs } from 'file-saver';
+import { FiDownload } from 'react-icons/fi';
 import { applicationContext } from '../../App';
-// import profilePicture from '../../images/profile.jpg';
 
 export default function Message({ text, sender, image, date }) {
   const { id } = useContext(applicationContext);
@@ -26,37 +26,32 @@ export default function Message({ text, sender, image, date }) {
     time = 'message__time';
   }
 
-  if (image === '') {
-    return (
-      <div className={leftOrRight}>
-        <div className={`${style}`}>
+  function saveFile(e) {
+    saveAs(e);
+  }
+
+  return (
+    <div className={leftOrRight}>
+      <div className={`${style}`}>
+        {image !== '' ? (
+          <>
+            <img
+              src={image}
+              onClick={() => saveFile(image)}
+              className="message__photo"
+              alt=""
+            />
+
+            <FiDownload onClick={() => saveFile(image)} className="icon-save" />
+          </>
+        ) : null}
+
+        {text === '' ? null : (
           <p className="message__content">
             {text}
             <br />
           </p>
-
-          <div className={hornStyle} />
-        </div>
-        <div className={time}>
-          {moment(Date.now()).format('DD/MM/YYYY') ===
-          moment(date).format('DD/MM/YYYY')
-            ? moment(date).fromNow()
-            : moment(date).format('DD/MM/YYYY - h:s')}
-        </div>
-      </div>
-    );
-  }
-  // else {
-  return (
-    <div className={leftOrRight}>
-      <div className={`${style}`}>
-        <img src={`${image}`} className="message__photo" alt="" />
-        {console.log('MESSAGE COMPONENT', image)}
-
-        <p className="message__content">
-          {text}
-          <br />
-        </p>
+        )}
 
         <div className={hornStyle} />
       </div>
@@ -68,5 +63,4 @@ export default function Message({ text, sender, image, date }) {
       </div>
     </div>
   );
-  // }
 }

@@ -1,8 +1,35 @@
-.home {
-  display: flex;
-  padding: 2.5%;
-  height: 89vh;
-  /* justify-content: space-between; */
+::-webkit-scrollbar {
+  display: none;
 }
 
-/* ::::::::::::::::::::::::::::::::::::::: */
+.middle-section {
+  width: 30%;
+  margin-right: 4%;
+  border-radius: 2rem;
+}
+
+.middle-section__contacts-list {
+  border-radius: 2rem;
+  background: #ffffff;
+  height: 73vh;
+  margin-top: 7%;
+  padding-top: 8%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  flex-direction: column;
+  box-shadow: 0 0.7rem 1rem #9c9c9c;
+}
+
+.middle-section__second-title {
+  padding-left: 5%;
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 530px) {
+  .home {
+    flex-direction: column;
+  }
+  .middle-section {
+    width: 100%;
+  }
+}

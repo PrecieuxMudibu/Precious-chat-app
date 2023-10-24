@@ -1,13 +1,13 @@
 .connection {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
   background: white;
   border-radius: 2rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* height: 80%; */
-  width: 80%;
-  /* align-items: center; */
-  margin: 5% auto;
-  height: 100%;
+  width: 60%;
   overflow: hidden;
 }
 
@@ -16,16 +16,11 @@
   /* border: 1px solid red; */
 }
 
-/* .connection__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-} */
 .connection__right {
   background-color: #5500ff;
   position: relative;
   height: 150%;
-  width: 100%;
+  width: 110%;
   transform: translateX(10%) translateY(-15%) rotate(10deg);
 
   /* clip-path: polygon(20% 0%, 100% 0%, 50% 100%, 0% 50%); */
@@ -47,19 +42,15 @@
 .blur-blue-top {
   position: relative;
   background: #7d15ff;
-  /* background:red; */
   border-radius: 2rem;
-
   height: 50%;
   width: 100%;
-
   transform: translateX(35%) translateY(-135%);
   z-index: 0;
 }
 .sky-blue {
   position: relative;
   background: #687fff;
-  /* background:#7D15FF; */
   height: 100%;
   width: 100%;
   transform: translateX(20%) translateY(-50%) rotate(-40deg);
@@ -78,11 +69,9 @@
 .connection__input-group {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .connection__input-group input {
-  /* border: 1px solid red; */
   font-size: 1.6rem;
   width: 75%;
   margin: 2%;
@@ -96,14 +85,44 @@
   color: rgb(134, 133, 133);
   font-size: 2.5rem;
   margin-right: 3%;
-
-  /* color:#4900E6; */
 }
 
 .connection__button {
-  margin: 2% 0;
+  margin: 6% 0;
   font-size: 1.6rem;
   background-color: #5500ff;
-  padding: 2% 5%;
+  /* padding: 2% 5%; */
+  padding: 1rem 3rem;
   border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  color:white;
+  transition: background-color 1s, color 1s;
+  border: 1px solid white;
+
+}
+
+.connection__button:hover {
+  background-color:white ;
+  color:#5500ff;
+  border: 1px solid #5500ff;
+}
+
+@media screen and (max-width: 530px) {
+  .connection {
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(0,0);
+    background: white;
+    border-radius: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .connection__right {
+    display: none;
+  }
 }

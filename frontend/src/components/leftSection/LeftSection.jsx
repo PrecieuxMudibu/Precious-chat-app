@@ -1,52 +1,191 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable import/order */
-import profilePicture from '../../images/profile.jpg';
+/* eslint-disable no-unused-vars */
+import axios from 'axios';
+import { useRef, useState, useEffect, useContext } from 'react';
 import { AiFillMessage } from 'react-icons/ai';
 // import { GrLogout } from 'react-icons/gr';
 import { RiLogoutBoxRFill, RiContactsFill } from 'react-icons/ri';
+import { Link, useNavigate } from 'react-router-dom';
+import { ColorRing } from 'react-loader-spinner';
+// eslint-disable-next-line import/no-cycle
+import { applicationContext } from '../../App';
 import './leftSection.css';
-import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function LeftSection() {
-  // const { id, setId } = useContext(applicationContext);
-  // setId(localStorage.getItem('id'));
   const navigate = useNavigate();
+  const pictureFile = useRef();
+  const [currentUserName, setCurrentUserName] = useState('');
 
-  // console.log(id);
+  const [fileChoosen, setFileChoosen] = useState(false);
+  const [fileInfo, setFileInfo] = useState({});
+  const [profilePicture, setProfilePicture] = useState('');
+  const [profilePictureUpdated, setProfilePictureUpdated] = useState(true);
+  const {
+    id,
+    setContactSelected,
+    setId,
+    setToken,
+    middleSectionVisibility,
+    token,
+  } = useContext(applicationContext);
+
+  const routeGetCurrentUserInfo = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
+  useEffect(() => {
+    setId(localStorage.getItem('id'));
+    setToken(localStorage.getItem('token'));
+    axios({
+      method: 'get',
+      url: routeGetCurrentUserInfo,
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        setProfilePicture(response.data.user_profile_picture);
+        console.log('USER INFO', response.data.user_name);
+        setCurrentUserName(response.data.user_name);
+      })
+      .catch((error) => console.error(error));
+  }, [id]);
   function logOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    setContactSelected(false);
     navigate('/login');
   }
 
+  function cancel() {
+    setFileChoosen(false);
+  }
+
+  async function updateProfileInDatabase(data) {
+    const routeUpdateUser = `${process.env.REACT_APP_API_URL}/api/user/${id}`;
+    axios({
+      method: 'put',
+      url: routeUpdateUser,
+      data: { user_profile_picture: data },
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) =>
+        console.log('MISE A JOUR DANS LA BASE DE DONNEES', response)
+      )
+      .catch((error) =>
+        console.error(
+          'ECHEC DE MISE A JOUR DANS LA BASE DE DONNEES ECHOUEE',
+          error
+        )
+      );
+  }
+
+  async function changeProfilePicture() {
+    setProfilePictureUpdated(false);
+
+    const cloudName = 'dzci2uq4z';
+    const formData = new FormData();
+    formData.append('file', fileInfo);
+    formData.append('upload_preset', 'testPresetName');
+
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData
+      )
+      .then((response) => {
+        setProfilePicture(response.data.secure_url);
+        updateProfileInDatabase(response.data.secure_url);
+        setProfilePictureUpdated(true);
+      });
+    setFileChoosen(false);
+  }
+
+  function uploadImage(files) {
+    // eslint-disable-next-line no-alert
+    alert('En continuant vous allez modifier votre photo de profil.');
+    setFileInfo(files[0]);
+    setFileChoosen(true);
+  }
+
   return (
-    <div className="left-section">
-      <img
-        src={profilePicture}
-        alt="profil"
-        className="left-section__profile-picture"
+    <div
+      className={window.screen.width<530 && middleSectionVisibility===false ? 'left-section hide' : 'left-section'}
+    >
+      {profilePictureUpdated === true ? (
+        <img
+          src={profilePicture}
+          alt="profil"
+          className="left-section__profile-picture"
+          onClick={() => pictureFile.current.click()}
+        />
+      ) : (
+        <div className="update-profile-picture-loader">
+          <ColorRing
+            visible
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['white', 'white', 'white', 'white', 'white']}
+          />
+        </div>
+      )}
+      <p className="left-section__current-user-name">{currentUserName}</p>
+      <input
+        ref={pictureFile}
+        type="file"
+        className="inputFile"
+        onChange={(event) => {
+          uploadImage(event.target.files);
+        }}
       />
+      {fileChoosen ? (
+        <>
+          <button
+            type="button"
+            className="left-section__button"
+            onClick={changeProfilePicture}
+          >
+            Valider
+          </button>
+          <button
+            type="button"
+            className="left-section__button left-section__button--cancel"
+            onClick={cancel}
+          >
+            Annuler
+          </button>
+        </>
+      ) : null}
+
       <nav className="left-section__navigation">
         <ul>
-          {/* <NavLink to="/">
-                        <li className="left-section__link">
-                            <AiFillMessage />
-                        </li>
-                    </NavLink>
-                    <NavLink to="/contacts">
-                        <li className="left-section__link">
-                            <RiContactsFill className="icon-contact" />
-                        </li>
-                    </NavLink> */}
+          {console.log(
+            `Votre résolution d'écran est: " + ${window.screen.width} + "x" ${window.screen.height}`
+          )}
           <li>
-            <NavLink to="/" className="left-section__link">
+            <Link
+              to="/"
+              className={
+                window.location.pathname === '/'
+                  ? 'left-section__link active'
+                  : 'left-section__link'
+              }
+            >
               <AiFillMessage />
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink to="/contacts" className="left-section__link">
+            <Link
+              to="/contacts"
+              className={
+                window.location.pathname === '/contacts'
+                  ? 'left-section__link active'
+                  : 'left-section__link'
+              }
+            >
               <RiContactsFill className="icon-contact" />
-            </NavLink>
+            </Link>
           </li>
         </ul>
       </nav>

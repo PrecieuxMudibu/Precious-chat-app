@@ -1,28 +1,45 @@
 /* eslint-disable import/no-cycle */
 import React, { useContext, useEffect, useState } from 'react';
+import { BiArrowBack } from 'react-icons/bi';
 import axios from 'axios';
-import profilePicture from '../../images/profile.jpg';
 import { applicationContext } from '../../App';
+import './rightSectionHeader.css';
 
 export default function RightSectionHeader() {
-  const { contactIdentifiant } = useContext(applicationContext);
+  const {
+    contactIdentifiant,
+    setRightSectionVisibility,
+    setMiddleSectionVisibility,
+    token,
+  } = useContext(applicationContext);
   const [contactInfo, setContactInfo] = useState({});
 
   useEffect(() => {
-    // const routeGetUser = `http://localhost:3200/api/users/${contactIdentifiant}`;
-    const routeGetUser = `${process.env.REACT_APP_API_URL}/api/users/${contactIdentifiant}`;
+    const routeGetUser = `${process.env.REACT_APP_API_URL}/api/user/${contactIdentifiant}`;
 
-    axios
-      .get(routeGetUser)
+    axios({
+      method: 'get',
+      url: routeGetUser,
+      headers: {
+        Authorization: token,
+      },
+    })
       .then((response) => {
-        setContactInfo(response.data.users);
+        setContactInfo(response.data);
       })
       .catch((error) => console.error(error));
   }, [contactIdentifiant]);
+
+  function goBack() {
+    setRightSectionVisibility(false);
+    setMiddleSectionVisibility(true);
+  }
+
   return (
     <div className="right-section__header">
+      <BiArrowBack className="right-section__arrow-back" onClick={goBack} />
       <img
-        src={profilePicture}
+        src={contactInfo.user_profile_picture}
         alt="profil du contact"
         className="right-section__profile-picture"
       />

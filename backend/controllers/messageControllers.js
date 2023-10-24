@@ -1,17 +1,31 @@
 const Message = require('../models/messageModel');
+const Conversation = require('../models/conversationModel');
 
 exports.sendMessage = (request, response, next) => {
     const message = new Message({
         message_text: request.body.message_text,
         message_image: request.body.message_image,
-        message_date: request.body.message_date,
         message_sender: request.body.message_sender,
         message_recipient: request.body.message_recipient,
         conversation_id: request.body.conversation_id,
     });
     message
         .save()
-        .then(() => response.status(201).json({ message: 'Message créé !' }))
+        .then((data) => {
+            let message_id = data._id;
+            const filter = { _id: request.body.conversation_id };
+            const update = {
+                conversation_last_message: message_id,
+            };
+            Conversation.findOneAndUpdate(filter, update, {
+                new: true,
+            })
+                .then((user) => {
+                    message: 'Mis à jour avec succès',
+                        response.status(200).json(user);
+                })
+                .catch((error) => response.status(500).json(error));
+        })
         .catch((error) => {
             response.status(400).json({ error });
         });

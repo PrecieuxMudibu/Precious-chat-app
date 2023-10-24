@@ -1,30 +1,57 @@
 .left-section {
-  /* border: 1Px solid red; */
   width: 13%;
   background-color: #5500ff;
   margin-right: 4%;
   border-radius: 2rem;
-
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .left-section__profile-picture {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin: 20%;
+  margin: 20% 0 0 0;
   align-self: center;
 }
 
+.left-section__current-user-name {
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-top: 10%;
+}
+
+.left-section__button {
+  align-self: center;
+  width: 80%;
+  border: none; 
+  margin: 2% 0;
+  font-size: 1.6rem;
+  padding: 6% 5%;
+  border-radius: 0.5rem;
+  color: #5500ff;
+  cursor: pointer;
+
+}
+
+.left-section__button--cancel {
+  background-color: rgba(255, 8, 8, 0.842);
+  color: white;
+
+}
 .left-section__navigation ul {
   margin-top: 4rem;
 }
 
 li {
   list-style: none;
+  margin-left:20%;
+   /* width: 80%; */
+  /* align-self: flex-end; */
 }
+
 .left-section__link {
   height: 7rem;
   color: white;
@@ -49,9 +76,66 @@ li {
   margin-top: 100%;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .icon-logout {
   /* background-color: white; */
   color: white;
+}
+
+.inputFile {
+  display: none;
+}
+
+.update-profile-picture-loader {
+  margin-top: 20%;
+  align-self: center;
+}
+
+.hide {
+  display: none;
+}
+@media screen and (max-width: 530px) {
+  .left-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  .left-section__current-user-name {
+    display: none;
+  }
+  .left-section__profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  .left-section__navigation ul {
+    margin-top: 0rem;
+    display: grid;
+    grid-template-columns: repeat(2, 50%)
+  }
+
+  .left-section__link {
+    height: 7rem;
+    color: white;
+    font-size: 4.5rem;
+    background: none;
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex;
+    padding-left: 0;
+  }
+
+  li {
+  margin-left:0;
+
+  }
+
+  .left-section__logout {
+    font-size: 4.5rem;
+    display: block;
+    margin: auto;
+  }
 }
