@@ -3,7 +3,7 @@
 There is two folders : frontend and backend
 Go to the two folders and type `npm install` for download all dependancies necessary for the projects.
 
-The most advanced branches are **<ins>main, develop</ins>** and **<ins>feature</ins>**.
+The most advanced branches are **<ins>develop</ins>** and **<ins>feature</ins>**.
 
 ## Frontend folder
 
